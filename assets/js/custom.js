@@ -41,6 +41,18 @@ class Tile {
             south: this.south
         });
     }
+
+    printTile(name) {
+       let template =`
+                    ${this.north}
+                    ^
+                    |
+        ${this.west} <-   Tile ${name}   -> ${this.east}
+                    |
+                    ${this.south}
+        `;
+        console.log(template);
+    }
 }
 
 class Map {
@@ -51,7 +63,7 @@ class Map {
     add(tile, x, y) {
 
         let position = `(${x}, ${y})`;
-        console.log(`insertando el title en la posicion ${position}`);
+        // console.log(`insertando el title en la posicion ${position}`);
 
         // Tile inicial
         if (x == 0 && y == 0) {
@@ -76,7 +88,7 @@ class Map {
             console.log(neighbourTile);
             console.log(tile);
 
-            if (tile.east == neighbourTile.west) {
+            if (tile.west == neighbourTile.east) {
                 this.graph[position] = tile;
                 console.log(`Agregando tile en la posicion ${position}`);
             } else {
@@ -90,8 +102,8 @@ class Map {
             console.log("existe a la derecha");
 
             let neighbourTile = this.graph[right];
-            console.log(neighbourTile);
-            console.log(tile);
+            console.log("Vecino", neighbourTile);
+            console.log("Tile", tile);
 
             if (tile.east == neighbourTile.west) {
                 this.graph[position] = tile;
@@ -145,6 +157,7 @@ class Map {
 const d = new Tile(ROAD, ROAD, CITY, GRASS, null);
 const k = new Tile(ROAD, GRASS, CITY, ROAD, null);
 const x = new Tile(ROAD, ROAD, GRASS, GRASS, null);
+const y = new Tile(ROAD, CITY, ROAD, CITY, null);
 console.log(k.toString());
 
 kRotated = k.rotate();
@@ -157,7 +170,15 @@ map.add(d, 0,0);
 // map.add(x, 1,0);
 // map.add(x, -1,0);
 // map.add(x, -1,0);
-map.add(x, 0,-1);
+map.add(x, 1,0);
+// map.add(y, -1,0);
+// map.add(y, 0,-1);
+// map.add(y, 1,-1);
+map.add(y, 2,0);
+d.printTile("d -> 0,0");
+x.printTile("x -> 1,0");
+y.printTile("y -> 2,0");
+
 
 
 
