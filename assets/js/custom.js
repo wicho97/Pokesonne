@@ -54,6 +54,18 @@ class Tile {
         `;
         console.log(template);
     }
+
+    printBoard(tile2) {
+        let template =`
+                    ${this.north}                                              ${tile2.north}        
+                    ^                                                       ^                                                   
+                    |                                                       |                                          
+        ${this.west} <-   Tile ${this.name}   -> ${this.east}    ******                ${tile2.west} <-   Tile ${tile2.name}   -> ${tile2.east}                               
+                    |                                                         |
+                    ${this.south}                                               ${tile2.south}
+        `;
+        console.log(template);
+    }
 }
 
 class Map {
@@ -62,7 +74,7 @@ class Map {
     }
 
     add(tile, x, y) {
-
+        let isValid = true;
         let position = `(${x}, ${y})`;
         // console.log(`insertando el title en la posicion ${position}`);
 
@@ -72,6 +84,7 @@ class Map {
             return;
         }
 
+        console.log("========================");
         console.log(this.graph);
 
         let left = `(${x-1}, ${y})`;
@@ -95,9 +108,11 @@ class Map {
             console.log(tile);
 
             if (tile.west == neighbourTile.east) {
-                this.graph[position] = tile;
+                // this.graph[position] = tile;
+
                 console.log(`Agregando tile en la posicion ${position}`);
             } else {
+                isValid = false;
                 console.log(`No se pudo agregar el tile en la posicion ${position}`);
             }
 
@@ -105,22 +120,27 @@ class Map {
         }
 
         if(keys.includes(right)){
+            console.log("**************************");
             console.log("existe a la derecha");
 
             let neighbourTile = this.graph[right];
             console.log("Vecino", neighbourTile);
+            console.log(neighbourTile.printTile())
             console.log("Tile", tile);
+            console.log(tile.printBoard(neighbourTile))
 
             console.log("Nuevo", tile.east);
             console.log("Vecino", neighbourTile.west);
             if (tile.east == neighbourTile.west) {
-                this.graph[position] = tile;
+                // this.graph[position] = tile;
                 console.log(`Agregando tile en la posicion ${position}`);
             } else {
+                isValid = false;
                 console.log(`No se pudo agregar el tile en la posicion ${position}`);
             }
 
             console.log(tile.south, neighbourTile.north);
+            console.log("**************************");
         }
 
         if(keys.includes(up)){
@@ -131,9 +151,10 @@ class Map {
             console.log("Tile", tile);
 
             if (tile.north == neighbourTile.south) {
-                this.graph[position] = tile;
+                // this.graph[position] = tile;
                 console.log(`Agregando tile en la posicion ${position}`);
             } else {
+                isValid = false;
                 console.log(`No se pudo agregar el tile en la posicion ${position}`);
             }
 
@@ -147,17 +168,19 @@ class Map {
             console.log(tile);
 
             if (tile.south == neighbourTile.north) {
-                this.graph[position] = tile;
+                // this.graph[position] = tile;
                 console.log(`Agregando tile en la posicion ${position}`);
             } else {
+                isValid = false;
                 console.log(`No se pudo agregar el tile en la posicion ${position}`);
             }
 
             console.log(tile.south, neighbourTile.north);
         }
 
-        
-        // this.graph[position] = tile;
+        if (isValid) {
+            this.graph[position] = tile;
+        }
         
     }
 }
@@ -188,17 +211,17 @@ map.add(w1, 1,0);
 map.add(w2, 0,1);
 map.add(w3, -1,0);
 map.add(w4, -2,0)
-map.add(w5, -1,1)
+map.add(w5, 1,1)
 // map.add(z, 1,1);
 // map.add(z, 2,0);
 // map.add(z, 1,-1);
 
 // w0.printTile("d -> 0,0");
 // w1.printTile("x -> 1,0");
-w2.printTile();
+// w2.printTile();
 // w3.printTile("z -> -1,0");
 // w4.printTile("z -> -2,0");
-w5.printTile();
+// w5.printTile();
 
 
 
