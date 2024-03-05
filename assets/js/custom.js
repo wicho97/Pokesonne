@@ -185,14 +185,14 @@ class Map {
     }
 }
 
-const w0 = new Tile(ROAD, ROAD, CITY, GRASS, null, "w0");
+const w0 = new Tile(ROAD, ROAD, CITY, GRASS, 'assets/img/loseta-0.jpeg', "w0");
 // const k = new Tile(ROAD, GRASS, CITY, ROAD, null, "w0");
-const w1 = new Tile(ROAD, ROAD, GRASS, GRASS, null, "w1");
-const w2 = new Tile(ROAD, CITY, ROAD, CITY, null, "w2");
-const w3 = new Tile(ROAD, ROAD, GRASS, ROAD, null, "w3");
-const w4 = new Tile(CITY, ROAD, ROAD, CITY, null, "w4");
-const w5 = new Tile(CITY, GRASS, CITY, GRASS, null, "w5");
-const w6 = new Tile(ROAD, GRASS, GRASS, ROAD, null, "w6");
+const w1 = new Tile(ROAD, ROAD, GRASS, GRASS, 'assets/img/loseta-1.jpeg', "w1");
+const w2 = new Tile(ROAD, CITY, ROAD, CITY, 'assets/img/loseta-2.jpeg', "w2");
+const w3 = new Tile(ROAD, ROAD, GRASS, ROAD, 'assets/img/loseta-3.jpeg', "w3");
+const w4 = new Tile(CITY, ROAD, ROAD, CITY, 'assets/img/loseta-4.jpeg', "w4");
+const w5 = new Tile(CITY, GRASS, CITY, GRASS, 'assets/img/loseta-5.jpeg', "w5");
+const w6 = new Tile(ROAD, GRASS, GRASS, ROAD, 'assets/img/loseta-6.jpeg', "w6");
 // console.log(k.toString());
 
 // kRotated = k.rotate();
@@ -227,11 +227,22 @@ map.add(w6, 1,-1)
 w6.printTile();
 
 
+const tileDeck = [
+    w1,
+    w2,
+    w3,
+    w4,
+    w5,
+    w6
+];
 
 
+const titleImg = document.getElementById("tile-img");
+
+titleImg.src = tileDeck[1].image;
 
 const btnRotateTile = document.getElementById("rotate-tile");
-const titleImg = document.getElementById("tile-img");
+
 let rotation = 0;
 
 function rotateTile() {
