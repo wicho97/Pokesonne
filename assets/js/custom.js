@@ -10,12 +10,13 @@ class Tile {
     // w <-   Tile   -> e
     //          |
     //          s
-    constructor(west, east, north, south, image, turn = 0) {
+    constructor(west, east, north, south, image, name = '', turn = 0) {
         this.west = west;
         this.east = east;
         this.north = north;
         this.south = south;
         this.image = image;
+        this.name = name;
         // Turn significa el numero de rotaciones de la loseta
         this.turn = turn;
     }
@@ -42,12 +43,12 @@ class Tile {
         });
     }
 
-    printTile(name) {
+    printTile() {
        let template =`
                     ${this.north}
                     ^
                     |
-        ${this.west} <-   Tile ${name}   -> ${this.east}
+        ${this.west} <-   Tile ${this.name}   -> ${this.east}
                     |
                     ${this.south}
         `;
@@ -81,6 +82,11 @@ class Map {
         let keys = Object.keys(this.graph);
         console.log(keys);
 
+        if (keys.includes(position)) {
+            console.log(`Ya existe un tile en esta posicion ${position}`);
+            return;
+        }
+
         if(keys.includes(left)){
             console.log("existe a la izquierda");
 
@@ -105,6 +111,8 @@ class Map {
             console.log("Vecino", neighbourTile);
             console.log("Tile", tile);
 
+            console.log("Nuevo", tile.east);
+            console.log("Vecino", neighbourTile.west);
             if (tile.east == neighbourTile.west) {
                 this.graph[position] = tile;
                 console.log(`Agregando tile en la posicion ${position}`);
@@ -154,30 +162,44 @@ class Map {
     }
 }
 
-const d = new Tile(ROAD, ROAD, CITY, GRASS, null);
-const k = new Tile(ROAD, GRASS, CITY, ROAD, null);
-const x = new Tile(ROAD, ROAD, GRASS, GRASS, null);
-const y = new Tile(ROAD, CITY, ROAD, CITY, null);
-console.log(k.toString());
+const w0 = new Tile(ROAD, ROAD, CITY, GRASS, null, "w0");
+// const k = new Tile(ROAD, GRASS, CITY, ROAD, null, "w0");
+const w1 = new Tile(ROAD, ROAD, GRASS, GRASS, null, "w1");
+const w2 = new Tile(ROAD, CITY, ROAD, CITY, null, "w2");
+const w3 = new Tile(ROAD, ROAD, GRASS, ROAD, null, "w3");
+const w4 = new Tile(CITY, ROAD, ROAD, CITY, null, "w4");
+const w5 = new Tile(CITY, GRASS, CITY, GRASS, null, "w5");
+// console.log(k.toString());
 
-kRotated = k.rotate();
-console.log("Después de la rotación:");
-console.log(kRotated.toString());
+// kRotated = k.rotate();
+// console.log("Después de la rotación:");
+// console.log(kRotated.toString());
 
 map = new Map();
-map.add(d, 0,0);
+map.add(w0, 0,0);
 // map.add(x, 0,1);
 // map.add(x, 1,0);
 // map.add(x, -1,0);
 // map.add(x, -1,0);
-map.add(x, 1,0);
+map.add(w1, 1,0);
 // map.add(y, -1,0);
 // map.add(y, 0,-1);
 // map.add(y, 1,-1);
-map.add(y, 2,0);
-d.printTile("d -> 0,0");
-x.printTile("x -> 1,0");
-y.printTile("y -> 2,0");
+map.add(w2, 0,1);
+map.add(w3, -1,0);
+map.add(w4, -2,0)
+map.add(w5, -1,1)
+// map.add(z, 1,1);
+// map.add(z, 2,0);
+// map.add(z, 1,-1);
+
+// w0.printTile("d -> 0,0");
+// w1.printTile("x -> 1,0");
+w2.printTile();
+// w3.printTile("z -> -1,0");
+// w4.printTile("z -> -2,0");
+w5.printTile();
+
 
 
 
