@@ -24,7 +24,29 @@ button {
     display: block;
     text-align: center;
     transition: all .3s ease-in;
+    height: 200px;
+    width: 200px;
 }
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(72, 1fr);
+    grid-template-rows: repeat(72, 1fr);
+    gap: 1px;
+}
+
+.grid-item {        
+    background-color: #ccc; 
+    border: 1px solid #000; 
+    height: 200px;
+    width: 200px;    
+    cursor: pointer;    
+}
+
+img {
+    height: 200px;
+    width: 200px;
+}
+
 
 /* Responsive */
 

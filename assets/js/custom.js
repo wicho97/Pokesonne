@@ -244,3 +244,19 @@ btnRotateTile.addEventListener("click", function() {
     rotateTile();
 });
 
+
+let gridItems = document.querySelectorAll(".grid-item");
+gridItems.forEach(element => {
+    element.addEventListener("click", function() {
+        gridItems.forEach(element => {
+            element.style.backgroundColor = '#ccc';
+            element.innerHTML = '';
+        })
+        // element.style.backgroundColor = 'red';
+        const img = document.createElement('img');
+        img.src = "assets/img/loseta.png";
+        element.appendChild(img);
+    });
+
+});
+// console.log(gridItems);
