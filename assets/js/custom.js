@@ -239,7 +239,7 @@ const tileDeck = [
 
 const titleImg = document.getElementById("tile-img");
 
-titleImg.src = tileDeck[1].image;
+titleImg.src = tileDeck[0].image;
 
 const btnRotateTile = document.getElementById("rotate-tile");
 
@@ -277,6 +277,7 @@ gridItems.forEach(element => {
         let rotation = titleImg.dataset.rotation;
         img.style.transform = `rotate(${rotation}deg)`;
         element.appendChild(img);
+        console.log("Posicion x, y",element.dataset.x, element.dataset.y)
     });
 
 });
