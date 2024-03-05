@@ -28,9 +28,11 @@ button {
     width: 200px;
 }
 .grid-container {
+    width: 500px;
+    margin: 20px auto;
     display: grid;
-    grid-template-columns: repeat(72, 1fr);
-    grid-template-rows: repeat(72, 1fr);
+    grid-template-columns: repeat(3, 0fr);
+    grid-template-rows: repeat(3, 0fr);
     gap: 1px;
 }
 
