@@ -192,6 +192,7 @@ const w2 = new Tile(ROAD, CITY, ROAD, CITY, null, "w2");
 const w3 = new Tile(ROAD, ROAD, GRASS, ROAD, null, "w3");
 const w4 = new Tile(CITY, ROAD, ROAD, CITY, null, "w4");
 const w5 = new Tile(CITY, GRASS, CITY, GRASS, null, "w5");
+const w6 = new Tile(ROAD, GRASS, GRASS, ROAD, null, "w6");
 // console.log(k.toString());
 
 // kRotated = k.rotate();
@@ -212,6 +213,7 @@ map.add(w2, 0,1);
 map.add(w3, -1,0);
 map.add(w4, -2,0)
 map.add(w5, 1,1)
+map.add(w6, 1,-1)
 // map.add(z, 1,1);
 // map.add(z, 2,0);
 // map.add(z, 1,-1);
@@ -222,6 +224,7 @@ map.add(w5, 1,1)
 // w3.printTile("z -> -1,0");
 // w4.printTile("z -> -2,0");
 // w5.printTile();
+w6.printTile();
 
 
 
@@ -237,7 +240,7 @@ function rotateTile() {
     console.log("entro");
 }
 
-btnRotateTile.addEventListener("clicd", function() {
+btnRotateTile.addEventListener("click", function() {
     rotateTile();
 });
 
