@@ -238,6 +238,13 @@ function rotateTile() {
     rotation += 90;
     titleImg.style.transform = `rotate(${rotation}deg)`;
     titleImg.dataset.rotation = rotation;
+
+    let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
+    gridItems.forEach(element => {    
+        element.style.backgroundColor = '#ccc';
+        element.innerHTML = '';
+    });
+
 }
 
 btnRotateTile.addEventListener(
