@@ -242,6 +242,10 @@ const titleImg = document.getElementById("tile-img");
 titleImg.src = tileDeck[0].image;
 
 const btnRotateTile = document.getElementById("rotate-tile");
+const btnPlaceTile = document.getElementById('place-tile');
+
+let currentTilePositionX = null;
+let currentTilePositionY = null;
 
 let rotation = 0;
 
@@ -264,6 +268,18 @@ btnRotateTile.addEventListener(
 });
 
 
+btnPlaceTile.addEventListener(
+    "click", function() {
+    console.log("colocar");
+
+    if (currentTilePositionX == null && currentTilePositionY == null) {
+        alert("No hay posicion");
+    }
+
+    console.log(currentTilePositionX);
+    console.log(currentTilePositionY);
+});
+
 let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
 gridItems.forEach(element => {
     element.addEventListener("click", function() {
@@ -278,6 +294,8 @@ gridItems.forEach(element => {
         img.style.transform = `rotate(${rotation}deg)`;
         element.appendChild(img);
         console.log("Posicion x, y",element.dataset.x, element.dataset.y)
+        currentTilePositionX = element.dataset.x;
+        currentTilePositionY = element.dataset.y;
     });
 
 });
