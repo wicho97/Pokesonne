@@ -237,10 +237,11 @@ let rotation = 0;
 function rotateTile() {
     rotation += 90;
     titleImg.style.transform = `rotate(${rotation}deg)`;
-    console.log("entro");
+    titleImg.dataset.rotation = rotation;
 }
 
-btnRotateTile.addEventListener("click", function() {
+btnRotateTile.addEventListener(
+    "click", function() {
     rotateTile();
 });
 
@@ -254,7 +255,9 @@ gridItems.forEach(element => {
         })
         element.style.backgroundColor = 'red';
         const img = document.createElement('img');
-        img.src = "assets/img/loseta.png";
+        img.src = titleImg.src;
+        let rotation = titleImg.dataset.rotation;
+        img.style.transform = `rotate(${rotation}deg)`;
         element.appendChild(img);
     });
 
