@@ -252,6 +252,8 @@ const btnPlaceTile = document.getElementById('place-tile');
 
 const gridContainer = document.getElementById("grid-container");
 
+buildGrid(7);
+
 let currentTilePositionX = null;
 let currentTilePositionY = null;
 
@@ -298,8 +300,8 @@ btnPlaceTile.addEventListener(
         const place = document.getElementById(`place_${currentTilePositionX}x${currentTilePositionY}y`);
         place.classList.add("block-item");
         tileIndex++;
-        console.log("Inidice:", tileIndex);
-        console.log("Deck length:", tileDeck.length);
+        // console.log("Inidice:", tileIndex);
+        // console.log("Deck length:", tileDeck.length);
     } else {
         alert("No se puede poner la loseta en esta posicion");
     }
@@ -318,23 +320,71 @@ function addClickEvents() {
 
         let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
 
-        gridItems.forEach(element => {
-            element.style.backgroundColor = '#ccc';
-            element.innerHTML = '';
-        })
+        if (e.target.classList.contains("grid-item")) {
+            gridItems.forEach(element => {
+                element.style.backgroundColor = '#ccc';
+                element.innerHTML = '';
+            })
+    
+            console.log(e.target);
+            const img = document.createElement('img');
+            img.src = titleImg.src;
+            let rotation = titleImg.dataset.rotation;
+            img.style.transform = `rotate(${rotation}deg)`;
+            e.target.appendChild(img);
+            console.log("Posicion x, y",e.target.dataset.x, e.target.dataset.y)
+            currentTilePositionX = e.target.dataset.x;
+            currentTilePositionY = e.target.dataset.y;
+        }
 
-        console.log(e.target);
-        const img = document.createElement('img');
-        img.src = titleImg.src;
-        let rotation = titleImg.dataset.rotation;
-        img.style.transform = `rotate(${rotation}deg)`;
-        e.target.appendChild(img);
-        console.log("Posicion x, y",e.target.dataset.x, e.target.dataset.y)
-        currentTilePositionX = e.target.dataset.x;
-        currentTilePositionY = e.target.dataset.y;
     });
 }
 
 addClickEvents();
+
+// size es impar y mayor que 3
+function buildGrid(size) {
+    let limit = Math.floor(size/2);
+    let cords = [];
+
+    for (let i = -limit; i <= limit; i++) {
+        for (let j = limit; j >= -limit; j--) {
+            cords.push([j,i]);
+        }
+    }
+
+    cords = cords.reverse();
+
+    cords.forEach(element => {
+        const grid = document.createElement('div');
+        grid.classList.add("grid-item");
+        grid.dataset.x = element[0];
+        grid.dataset.y = element[1];
+        grid.setAttribute("id", `place_${element[0]}x${element[1]}y`);
+
+        if (element[0] == 0 && element[1] == 0) {
+            // <div class="grid-item block-item" id="place_0x0y" data-x="0" data-y="0"><img src="assets/img/loseta-0.jpeg" alt=""></div>
+            grid.classList.add("block-item");
+            const img = document.createElement('img');
+            img.src = w0.image;
+            grid.appendChild(img);
+        }
+
+        gridContainer.appendChild(grid);
+    });
+
+
+    // [-1,1], [0,1], [1,1],
+    // [-1,0], [0,0], [1,0],
+    // [-1,-1],[0,-1],[1,-1]
+    
+
+    // let total = height * width;
+    // for (let i =0; i <= total; i++) {
+    //     const grid = document.createElement('div');
+    //     grid.classList.add("grid-item");
+    // }
+    // <div class="grid-item" id="place_-1x1y" data-x="-1" data-y="1"></div>
+}
 
 // console.log(gridItems);
