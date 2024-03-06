@@ -289,25 +289,59 @@ btnPlaceTile.addEventListener(
     console.log("===========Agregar Mapa=========");
     // tileDeck[tileIndex].printTile();
     // console.log(map.graph);
+    const place = document.getElementById(`place_${currentTilePositionX}x${currentTilePositionY}y`)
+    place.removeEventListener("click", null);
+    place.classList.add("block-item");
 });
 
-let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
-gridItems.forEach(element => {
-    element.addEventListener("click", function() {
-        gridItems.forEach(element => {
-            element.style.backgroundColor = '#ccc';
-            element.innerHTML = '';
-        })
-        element.style.backgroundColor = 'red';
-        const img = document.createElement('img');
-        img.src = titleImg.src;
-        let rotation = titleImg.dataset.rotation;
-        img.style.transform = `rotate(${rotation}deg)`;
-        element.appendChild(img);
-        console.log("Posicion x, y",element.dataset.x, element.dataset.y)
-        currentTilePositionX = element.dataset.x;
-        currentTilePositionY = element.dataset.y;
+function addClickEvents() {
+    let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
+    gridItems.forEach(element => {
+        element.addEventListener("click", function(e) {
+            gridItems.forEach(element => {
+                element.style.backgroundColor = '#ccc';
+                element.innerHTML = '';
+            })
+            console.log("Clases del elemento actual:", element.classList)
+            element.style.backgroundColor = 'red';
+            const img = document.createElement('img');
+            img.src = titleImg.src;
+            let rotation = titleImg.dataset.rotation;
+            img.style.transform = `rotate(${rotation}deg)`;
+            element.appendChild(img);
+            console.log("Posicion x, y",element.dataset.x, element.dataset.y)
+            currentTilePositionX = element.dataset.x;
+            currentTilePositionY = element.dataset.y;
+        });
+
     });
+}
 
-});
+function removeClickEvents() {
+
+    let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
+
+    gridItems.forEach(element => {
+        element.addEventListener("click", function() {
+            gridItems.forEach(element => {
+                element.style.backgroundColor = '#ccc';
+                element.innerHTML = '';
+            })
+            console.log("Clases del elemento actual:", element.classList)
+            element.style.backgroundColor = 'red';
+            const img = document.createElement('img');
+            img.src = titleImg.src;
+            let rotation = titleImg.dataset.rotation;
+            img.style.transform = `rotate(${rotation}deg)`;
+            element.appendChild(img);
+            console.log("Posicion x, y",element.dataset.x, element.dataset.y)
+            currentTilePositionX = element.dataset.x;
+            currentTilePositionY = element.dataset.y;
+        });
+
+    });
+}
+
+addClickEvents();
+
 // console.log(gridItems);
