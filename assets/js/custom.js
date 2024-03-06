@@ -250,6 +250,8 @@ titleImg.src = tileDeck[tileIndex].image;
 const btnRotateTile = document.getElementById("rotate-tile");
 const btnPlaceTile = document.getElementById('place-tile');
 
+const gridContainer = document.getElementById("grid-container");
+
 let currentTilePositionX = null;
 let currentTilePositionY = null;
 
@@ -284,61 +286,52 @@ btnPlaceTile.addEventListener(
         alert("No hay posicion");
         return;
     }
-    console.log("===========Agregar Mapa==============");
-    console.log(map.add(tileDeck[tileIndex], parseInt(currentTilePositionX),parseInt(currentTilePositionY)))
-    console.log("===========Agregar Mapa=========");
+    // console.log("===========Agregar Mapa==============");
+    // console.log(map.add(tileDeck[tileIndex], parseInt(currentTilePositionX),parseInt(currentTilePositionY)))
+    // console.log("===========Agregar Mapa=========");
     // tileDeck[tileIndex].printTile();
     // console.log(map.graph);
-    const place = document.getElementById(`place_${currentTilePositionX}x${currentTilePositionY}y`)
-    place.removeEventListener("click", null);
-    place.classList.add("block-item");
+
+    let isValid = map.add(tileDeck[tileIndex], parseInt(currentTilePositionX),parseInt(currentTilePositionY));
+
+    if (isValid) {
+        const place = document.getElementById(`place_${currentTilePositionX}x${currentTilePositionY}y`);
+        place.classList.add("block-item");
+        tileIndex++;
+        console.log("Inidice:", tileIndex);
+        console.log("Deck length:", tileDeck.length);
+    } else {
+        alert("No se puede poner la loseta en esta posicion");
+    }
+
+    // TODO: Quitar el boton cuando no haya mas losetas
+    if (tileIndex < tileDeck.length) {
+        titleImg.src = tileDeck[tileIndex].image;
+    } else {
+        alert("No hay mas loseta");
+    }
+    
 });
 
 function addClickEvents() {
-    let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
-    gridItems.forEach(element => {
-        element.addEventListener("click", function(e) {
-            gridItems.forEach(element => {
-                element.style.backgroundColor = '#ccc';
-                element.innerHTML = '';
-            })
-            console.log("Clases del elemento actual:", element.classList)
-            element.style.backgroundColor = 'red';
-            const img = document.createElement('img');
-            img.src = titleImg.src;
-            let rotation = titleImg.dataset.rotation;
-            img.style.transform = `rotate(${rotation}deg)`;
-            element.appendChild(img);
-            console.log("Posicion x, y",element.dataset.x, element.dataset.y)
-            currentTilePositionX = element.dataset.x;
-            currentTilePositionY = element.dataset.y;
-        });
+    gridContainer.addEventListener("click", function(e) {
 
-    });
-}
+        let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
 
-function removeClickEvents() {
+        gridItems.forEach(element => {
+            element.style.backgroundColor = '#ccc';
+            element.innerHTML = '';
+        })
 
-    let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
-
-    gridItems.forEach(element => {
-        element.addEventListener("click", function() {
-            gridItems.forEach(element => {
-                element.style.backgroundColor = '#ccc';
-                element.innerHTML = '';
-            })
-            console.log("Clases del elemento actual:", element.classList)
-            element.style.backgroundColor = 'red';
-            const img = document.createElement('img');
-            img.src = titleImg.src;
-            let rotation = titleImg.dataset.rotation;
-            img.style.transform = `rotate(${rotation}deg)`;
-            element.appendChild(img);
-            console.log("Posicion x, y",element.dataset.x, element.dataset.y)
-            currentTilePositionX = element.dataset.x;
-            currentTilePositionY = element.dataset.y;
-        });
-
+        console.log(e.target);
+        const img = document.createElement('img');
+        img.src = titleImg.src;
+        let rotation = titleImg.dataset.rotation;
+        img.style.transform = `rotate(${rotation}deg)`;
+        e.target.appendChild(img);
+        console.log("Posicion x, y",e.target.dataset.x, e.target.dataset.y)
+        currentTilePositionX = e.target.dataset.x;
+        currentTilePositionY = e.target.dataset.y;
     });
 }
 
