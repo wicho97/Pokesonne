@@ -84,7 +84,6 @@ class Map {
             return;
         }
 
-        console.log("========================");
         console.log(this.graph);
 
         let left = `(${x-1}, ${y})`;
@@ -93,94 +92,100 @@ class Map {
         let down = `(${x}, ${y - 1})`;
 
         let keys = Object.keys(this.graph);
-        console.log(keys);
+        // console.log(keys);
 
         if (keys.includes(position)) {
-            console.log(`Ya existe un tile en esta posicion ${position}`);
-            return;
+            // console.log(`Ya existe un tile en esta posicion ${position}`);
+            return false;
         }
 
-        if(keys.includes(left)){
-            console.log("existe a la izquierda");
-
-            let neighbourTile = this.graph[left];
-            console.log(neighbourTile);
-            console.log(tile);
-
-            if (tile.west == neighbourTile.east) {
-                // this.graph[position] = tile;
-
-                console.log(`Agregando tile en la posicion ${position}`);
-            } else {
-                isValid = false;
-                console.log(`No se pudo agregar el tile en la posicion ${position}`);
+        if (keys.includes(left) || keys.includes(right) || keys.includes(up) || keys.includes(down)) {
+            if(keys.includes(left)){
+                // console.log("existe a la izquierda");
+    
+                let neighbourTile = this.graph[left];
+                // console.log(neighbourTile);
+                // console.log(tile);
+    
+                if (tile.west == neighbourTile.east) {
+                    // this.graph[position] = tile;
+    
+                    // console.log(`Agregando tile en la posicion ${position}`);
+                } else {
+                    isValid = false;
+                    // console.log(`No se pudo agregar el tile en la posicion ${position}`);
+                }
+    
+                // console.log(tile.south, neighbourTile.north);
             }
-
-            console.log(tile.south, neighbourTile.north);
-        }
-
-        if(keys.includes(right)){
-            console.log("**************************");
-            console.log("existe a la derecha");
-
-            let neighbourTile = this.graph[right];
-            console.log("Vecino", neighbourTile);
-            console.log(neighbourTile.printTile())
-            console.log("Tile", tile);
-            console.log(tile.printBoard(neighbourTile))
-
-            console.log("Nuevo", tile.east);
-            console.log("Vecino", neighbourTile.west);
-            if (tile.east == neighbourTile.west) {
-                // this.graph[position] = tile;
-                console.log(`Agregando tile en la posicion ${position}`);
-            } else {
-                isValid = false;
-                console.log(`No se pudo agregar el tile en la posicion ${position}`);
+    
+            if(keys.includes(right)){
+                // console.log("**************************");
+                // console.log("existe a la derecha");
+    
+                let neighbourTile = this.graph[right];
+                // console.log("Vecino", neighbourTile);
+                // console.log(neighbourTile.printTile())
+                // console.log("Tile", tile);
+                // console.log(tile.printBoard(neighbourTile))
+    
+                // console.log("Nuevo", tile.east);
+                // console.log("Vecino", neighbourTile.west);
+                if (tile.east == neighbourTile.west) {
+                    // this.graph[position] = tile;
+                    // console.log(`Agregando tile en la posicion ${position}`);
+                } else {
+                    isValid = false;
+                    // console.log(`No se pudo agregar el tile en la posicion ${position}`);
+                }
+    
+                // console.log(tile.south, neighbourTile.north);
+                // console.log("**************************");
             }
-
-            console.log(tile.south, neighbourTile.north);
-            console.log("**************************");
-        }
-
-        if(keys.includes(up)){
-            console.log("existe a la arriba");
-
-            let neighbourTile = this.graph[up];
-            console.log("Vecino", neighbourTile);
-            console.log("Tile", tile);
-
-            if (tile.north == neighbourTile.south) {
-                // this.graph[position] = tile;
-                console.log(`Agregando tile en la posicion ${position}`);
-            } else {
-                isValid = false;
-                console.log(`No se pudo agregar el tile en la posicion ${position}`);
+    
+            if(keys.includes(up)){
+                // console.log("existe a la arriba");
+    
+                let neighbourTile = this.graph[up];
+                // console.log("Vecino", neighbourTile);
+                // console.log("Tile", tile);
+    
+                if (tile.north == neighbourTile.south) {
+                    // this.graph[position] = tile;
+                    // console.log(`Agregando tile en la posicion ${position}`);
+                } else {
+                    isValid = false;
+                    // console.log(`No se pudo agregar el tile en la posicion ${position}`);
+                }
+    
+                // console.log(tile.south, neighbourTile.north);
             }
-
-            console.log(tile.south, neighbourTile.north);
-        }
-
-        if(keys.includes(down)){
-            console.log("existe a la abajo");
-            let neighbourTile = this.graph[down];
-            console.log(neighbourTile);
-            console.log(tile);
-
-            if (tile.south == neighbourTile.north) {
-                // this.graph[position] = tile;
-                console.log(`Agregando tile en la posicion ${position}`);
-            } else {
-                isValid = false;
-                console.log(`No se pudo agregar el tile en la posicion ${position}`);
+    
+            if(keys.includes(down)){
+                // console.log("existe a la abajo");
+                let neighbourTile = this.graph[down];
+                // console.log(neighbourTile);
+                // console.log(tile);
+    
+                if (tile.south == neighbourTile.north) {
+                    // this.graph[position] = tile;
+                    // console.log(`Agregando tile en la posicion ${position}`);
+                } else {
+                    isValid = false;
+                    // console.log(`No se pudo agregar el tile en la posicion ${position}`);
+                }
+    
+                // console.log(tile.south, neighbourTile.north);
             }
-
-            console.log(tile.south, neighbourTile.north);
+        
+            if (isValid) {
+                this.graph[position] = tile;
+                return true;
+            }
+            
         }
 
-        if (isValid) {
-            this.graph[position] = tile;
-        }
+        return false;
         
     }
 }
@@ -205,15 +210,15 @@ map.add(w0, 0,0);
 // map.add(x, 1,0);
 // map.add(x, -1,0);
 // map.add(x, -1,0);
-map.add(w1, 1,0);
+// map.add(w1, 1,0);
 // map.add(y, -1,0);
 // map.add(y, 0,-1);
 // map.add(y, 1,-1);
-map.add(w2, 0,1);
-map.add(w3, -1,0);
-map.add(w4, -2,0)
-map.add(w5, 1,1)
-map.add(w6, 1,-1)
+// map.add(w2, 0,1);
+// map.add(w3, -1,0);
+// map.add(w4, -2,0)
+// map.add(w5, 1,1)
+// map.add(w6, 1,-1)
 // map.add(z, 1,1);
 // map.add(z, 2,0);
 // map.add(z, 1,-1);
@@ -224,7 +229,7 @@ map.add(w6, 1,-1)
 // w3.printTile("z -> -1,0");
 // w4.printTile("z -> -2,0");
 // w5.printTile();
-w6.printTile();
+// w6.printTile();
 
 
 const tileDeck = [
@@ -238,8 +243,9 @@ const tileDeck = [
 
 
 const titleImg = document.getElementById("tile-img");
+let tileIndex = 0;
 
-titleImg.src = tileDeck[0].image;
+titleImg.src = tileDeck[tileIndex].image;
 
 const btnRotateTile = document.getElementById("rotate-tile");
 const btnPlaceTile = document.getElementById('place-tile');
@@ -271,13 +277,18 @@ btnRotateTile.addEventListener(
 btnPlaceTile.addEventListener(
     "click", function() {
     console.log("colocar");
+    console.log(currentTilePositionX);
+    console.log(currentTilePositionY);
 
     if (currentTilePositionX == null && currentTilePositionY == null) {
         alert("No hay posicion");
+        return;
     }
-
-    console.log(currentTilePositionX);
-    console.log(currentTilePositionY);
+    console.log("===========Agregar Mapa==============");
+    console.log(map.add(tileDeck[tileIndex], parseInt(currentTilePositionX),parseInt(currentTilePositionY)))
+    console.log("===========Agregar Mapa=========");
+    // tileDeck[tileIndex].printTile();
+    // console.log(map.graph);
 });
 
 let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
