@@ -98,36 +98,20 @@ class CarcassonneMap {
             if (this.tiles.has(position)) {
                 let neighbourTile = this.tiles.get(position);
 
-                if (index == UP) {
-                    if (tile.up == neighbourTile.down) {
-                        isValid = true;
-                    } else {
-                        return false;
-                    }
+                if (index == UP && tile.up == neighbourTile.down) {
+                    isValid = true;
                 }
 
-                if (index == DOWN) {
-                    if (tile.down == neighbourTile.up) {
-                        isValid = true;
-                    } else {
-                        return false;
-                    }
+                if (index == DOWN && tile.down == neighbourTile.up) {
+                    isValid = true;
                 }
 
-                if (index == LEFT) {
-                    if (tile.left == neighbourTile.right) {
-                        isValid = true;
-                    } else {
-                        return false;
-                    }
+                if (index == LEFT && tile.left == neighbourTile.right) {
+                    isValid = true;
                 }
 
-                if (index == RIGHT) {
-                    if (tile.right == neighbourTile.left) {
-                        isValid = true;
-                    } else {
-                        return false;
-                    }
+                if (index == RIGHT && tile.right == neighbourTile.left) {
+                    isValid = true;
                 }
             }
         });
