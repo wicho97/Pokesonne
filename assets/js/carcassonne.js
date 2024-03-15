@@ -36,21 +36,21 @@ class Tile {
             newLeft = this.down;
             newRight = this.up;
 
-        } else if (degree == 180){
+        } else if (degree == 180) {
 
             newUp = this.down;
             newDown = this.up;
             newLeft = this.right;
             newRight = this.left;
 
-        } else if (degree == 270){
+        } else if (degree == 270) {
 
             newUp = this.right;
             newDown = this.left;
             newLeft = this.up;
             newRight = this.down;
 
-        } else if (degree == 0){
+        } else if (degree == 0) {
 
             newUp = this.up;
             newDown = this.down;
@@ -68,15 +68,15 @@ class CarcassonneMap {
         this.tiles = new Map();
     }
 
-    _getKey(x,y) {
+    _getKey(x, y) {
         return `(${x},${y})`;
     }
 
     add(tile, x, y) {
         let isInInitialPosition = x == 0 && y == 0
-        let isInMap = this.tiles.has(this._getKey(x,y));
+        let isInMap = this.tiles.has(this._getKey(x, y));
         if (!isInMap && isInInitialPosition) {
-            this.tiles.set(this._getKey(x,y), tile);
+            this.tiles.set(this._getKey(x, y), tile);
             return true;
         }
 
@@ -117,7 +117,7 @@ class CarcassonneMap {
         });
 
         if (isValid) {
-            this.tiles.set(this._getKey(x,y), tile);
+            this.tiles.set(this._getKey(x, y), tile);
         }
         return isValid;
     }
@@ -126,7 +126,53 @@ class CarcassonneMap {
         return this.tiles.size;
     }
 
-    get(x,y) {
-        return this.tiles.get(this._getKey(x,y));
+    get(x, y) {
+        return this.tiles.get(this._getKey(x, y));
     }
 }
+
+var GameApp = GameApp || {}
+GameApp.settings = {
+    INITIAL_TILE : new Tile(CITY, GRASS, ROAD, ROAD, 'assets/img/loseta-0.jpeg'),
+    TILE_IMG: document.getElementById("tile-img"),
+    BTN_ROTATE_TILE: document.getElementById("rotate-tile"),
+    BTN_PLACE_TILE: document.getElementById('place-tile'),
+    GRID_CONTAINER: document.getElementById("grid-container"),
+}
+
+GameApp.buildGrid = function (size) {
+    let limit = Math.floor(size / 2);
+    let cords = [];
+
+    for (let i = -limit; i <= limit; i++) {
+        for (let j = limit; j >= -limit; j--) {
+            cords.push([j, i]);
+        }
+    }
+
+    cords = cords.reverse();
+
+    cords.forEach(element => {
+        const grid = document.createElement('div');
+        grid.classList.add("grid-item");
+        grid.dataset.x = element[0];
+        grid.dataset.y = element[1];
+        grid.setAttribute("id", `place_${element[0]}x${element[1]}y`);
+
+        if (element[0] == 0 && element[1] == 0) {
+            // <div class="grid-item block-item" id="place_0x0y" data-x="0" data-y="0"><img src="assets/img/loseta-0.jpeg" alt=""></div>
+            grid.classList.add("block-item");
+            const img = document.createElement('img');
+            img.src = GameApp.settings.INITIAL_TILE.image;
+            grid.appendChild(img);
+        }
+
+        GameApp.settings.GRID_CONTAINER.appendChild(grid);
+    });
+}
+
+GameApp.init = function() {
+    GameApp.buildGrid(3);
+}
+
+GameApp.init();
