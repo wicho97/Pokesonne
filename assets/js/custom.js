@@ -198,6 +198,7 @@ const w3 = new Tile(ROAD, ROAD, GRASS, ROAD, 'assets/img/loseta-3.jpeg', "w3");
 const w4 = new Tile(CITY, ROAD, ROAD, CITY, 'assets/img/loseta-4.jpeg', "w4");
 const w5 = new Tile(CITY, GRASS, CITY, GRASS, 'assets/img/loseta-5.jpeg', "w5");
 const w6 = new Tile(ROAD, GRASS, GRASS, ROAD, 'assets/img/loseta-6.jpeg', "w6");
+
 // console.log(k.toString());
 
 // kRotated = k.rotate();
@@ -233,6 +234,7 @@ map.add(w0, 0,0);
 
 
 const tileDeck = [
+    w4,
     w1,
     w2,
     w3,
@@ -252,7 +254,7 @@ const btnPlaceTile = document.getElementById('place-tile');
 
 const gridContainer = document.getElementById("grid-container");
 
-buildGrid(7);
+buildGrid(3);
 
 let currentTilePositionX = null;
 let currentTilePositionY = null;
@@ -260,6 +262,9 @@ let currentTilePositionY = null;
 let rotation = 0;
 
 function rotateTile() {
+
+    tileDeck[tileIndex] = tileDeck[tileIndex].rotate();
+
     rotation += 90;
     titleImg.style.transform = `rotate(${rotation}deg)`;
     titleImg.dataset.rotation = rotation;
@@ -303,6 +308,7 @@ btnPlaceTile.addEventListener(
         // console.log("Inidice:", tileIndex);
         // console.log("Deck length:", tileDeck.length);
     } else {
+        console.log(tileDeck[tileIndex]);
         alert("No se puede poner la loseta en esta posicion");
     }
 

@@ -1,0 +1,292 @@
+<html>
+
+<meta charset="utf-8">
+
+<script src="assets/js/carcassonne.js"></script>
+<script src="assets/js/test_micro_framework.js"></script>
+<link rel="stylesheet" href="assets/css/test_micro_framework.css">
+
+<body>
+    <script>
+        it('Implementando la clase Tile con up, down, left y right e imagen', () => {
+            let tile = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+            assertEqual(tile.up, ROAD);
+            assertEqual(tile.down, ROAD);
+            assertEqual(tile.left, CITY);
+            assertEqual(tile.right, GRASS);
+
+            assertEqual(tile.image, 'imageUri');
+        });
+
+        it('Implementando el metodo rotate(), que rota el Tile a 90 grados a la derecha, de la clase Tile()', () => {
+            let tile = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+
+            //         road
+            //          ^
+            //          |
+            // city <- Tile -> grass
+            //          |
+            //         road
+
+            //         city
+            //          ^
+            //          |
+            // road <- Tile 90 -> road
+            //          |
+            //         grass
+
+            let rotatedTile = tile.rotate();
+
+            assertEqual(rotatedTile.up, CITY);
+            assertEqual(rotatedTile.down, GRASS);
+            assertEqual(rotatedTile.left, ROAD);
+            assertEqual(rotatedTile.right, ROAD);
+
+            // La imagen se tiene que preservar
+            assertEqual(rotatedTile.image, 'imageUri');
+        });
+
+        it('Implementando el metodo rotate() con degress(grado)', () => {
+            let tile = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+
+            //         road
+            //          ^
+            //          |
+            // city <- Tile -> grass
+            //          |
+            //         road
+
+            //         city
+            //          ^
+            //          |
+            // road <- Tile 90 -> road
+            //          |
+            //         grass
+
+            let rotatedTile = tile.rotate(degree = 90);
+
+            assertEqual(rotatedTile.up, CITY);
+            assertEqual(rotatedTile.down, GRASS);
+            assertEqual(rotatedTile.left, ROAD);
+            assertEqual(rotatedTile.right, ROAD);
+
+            // La imagen se tiene que preservar
+            assertEqual(rotatedTile.image, 'imageUri');
+            
+            //            (road)
+            //              ^
+            //              |
+            // (grass) <- Tile 180 -> (city)
+            //              |
+            //            (road)
+
+            rotatedTile = tile.rotate(degree = 180);
+
+            assertEqual(rotatedTile.up, ROAD);
+            assertEqual(rotatedTile.down, ROAD);
+            assertEqual(rotatedTile.left, GRASS);
+            assertEqual(rotatedTile.right, CITY);
+
+            // La imagen se tiene que preservar
+            assertEqual(rotatedTile.image, 'imageUri');
+
+            //            grass
+            //             ^
+            //             |
+            // road <- Tile 270 -> road
+            //             |
+            //            city
+
+            rotatedTile = tile.rotate(degree = 270);
+
+            assertEqual(rotatedTile.up, GRASS);
+            assertEqual(rotatedTile.down, CITY);
+            assertEqual(rotatedTile.left, ROAD);
+            assertEqual(rotatedTile.right, ROAD);
+
+            // La imagen se tiene que preservar
+            assertEqual(rotatedTile.image, 'imageUri');
+
+            //           road
+            //            ^
+            //            |
+            // city <- Tile 360 -> grass
+            //            |
+            //           road
+
+            rotatedTile = tile.rotate(degree = 360);
+
+            assertEqual(rotatedTile.up, ROAD);
+            assertEqual(rotatedTile.down, ROAD);
+            assertEqual(rotatedTile.left, CITY);
+            assertEqual(rotatedTile.right, GRASS);
+
+            // La imagen se tiene que preservar
+            assertEqual(rotatedTile.image, 'imageUri');
+        });
+
+        it('Implementando el metodo rotate(450) de la clase Tile()', () => {
+            let tile = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+
+            //         road
+            //          ^
+            //          |
+            // city <- Tile -> grass
+            //          |
+            //         road
+
+
+
+            let rotatedTile = tile.rotate(450);
+
+            assertEqual(rotatedTile.up, CITY);
+            assertEqual(rotatedTile.down, GRASS);
+            assertEqual(rotatedTile.left, ROAD);
+            assertEqual(rotatedTile.right, ROAD);
+
+            // La imagen se tiene que preservar
+            assertEqual(rotatedTile.image, 'imageUri');
+        });
+
+        it('Implementando el metodo rotate(720) de la clase Tile()', () => {
+            let tile = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+
+            //         road
+            //          ^
+            //          |
+            // city <- Tile -> grass
+            //          |
+            //         road
+
+            let rotatedTile = tile.rotate(720);
+
+            assertEqual(rotatedTile.up, ROAD);
+            assertEqual(rotatedTile.down, ROAD);
+            assertEqual(rotatedTile.left, CITY);
+            assertEqual(rotatedTile.right, GRASS);
+
+            // La imagen se tiene que preservar
+            assertEqual(rotatedTile.image, 'imageUri');
+        });
+
+        // it('Implementando el metodo rotate(-90) de la clase Tile()', () => {
+        //     let tile = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+
+        //     //         road
+        //     //          ^
+        //     //          |
+        //     // city <- Tile -> grass
+        //     //          |
+        //     //         road
+
+        //     //          (grass)
+        //     //             ^
+        //     //             |
+        //     // (road) <- Tile -90 -> (road)
+        //     //             |
+        //     //           (city)
+
+        //     let rotatedTile = tile.rotate(-90);
+
+        //     assertEqual(rotatedTile.up, GRASS);
+        //     assertEqual(rotatedTile.down, CITY);
+        //     assertEqual(rotatedTile.left, ROAD);
+        //     assertEqual(rotatedTile.right, ROAD);
+
+        //     // La imagen se tiene que preservar
+        //     assertEqual(rotatedTile.image, 'imageUri');
+        // });
+
+        it('Implementando la clase CarcassonneMap()', () => {
+            let map = new CarcassonneMap();
+        });
+
+        it('Implementando el metodo add() de la clase CarcassonneMap', () => {
+            let map = new CarcassonneMap();
+            let tile = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+            map.add(tile, 0,0);
+        });
+
+        it('Implementando el metodo size() de la clase CarcassonneMap', () => {
+            let map = new CarcassonneMap();
+            let tile = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+            map.add(tile, 0,0);
+            assertEqual(map.size(), 1);
+        });
+
+        it('El metodo add() solo debe agregar el tile una sola vez en la posicion x,y', () => {
+            let map = new CarcassonneMap();
+            let tile = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+            map.add(tile, 0,0);
+            map.add(tile, 0,0);
+            assertEqual(map.size(), 1);
+        });
+
+        it('El metodo add() no debe permitir cambios del Tile en la posicion x,y', () => {
+            let map = new CarcassonneMap();
+            let tile = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+            let tile2 = new Tile(ROAD, ROAD, ROAD, ROAD, 'imageUri');
+            map.add(tile, 0,0);
+            map.add(tile2, 0,0);
+
+            let recoveredTile = map.get(0,0)
+            // El tile recuperado tiene que ser el tile y no tile2
+            assertEqual(recoveredTile.up, ROAD);
+            assertEqual(recoveredTile.down, ROAD);
+            assertEqual(recoveredTile.left, CITY);
+            assertEqual(recoveredTile.right, GRASS);
+
+            assertEqual(map.size(), 1);
+        });
+
+        it('Implementado el metodo get(x,y)', () => {
+            let map = new CarcassonneMap();
+            let tile = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+            map.add(tile, 0,0);
+            let recoveredTile = map.get(0,0)
+            assertEqual(recoveredTile.up, ROAD);
+            assertEqual(recoveredTile.down, ROAD);
+            assertEqual(recoveredTile.left, CITY);
+            assertEqual(recoveredTile.right, GRASS);
+        });
+
+        it('Solo se puede agregar tiles que tengan caras con el mismo tipo', () => {
+            let map = new CarcassonneMap();
+            let tile0 = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+            let tile1 = new Tile(ROAD, ROAD, GRASS, GRASS, 'assets/img/loseta-1.jpeg');
+            map.add(tile0, 0,0);
+            let isPossible = map.add(tile1, 1,0);
+
+            console.log(tile0);
+            console.log(tile1);
+            console.log(map.tiles);
+
+            assertEqual(map.size(),2);
+            assertEqual(isPossible,true);
+        });
+
+        it('No se puede agregar un tile al mapa que no comparta la misma cara', () => {
+            let map = new CarcassonneMap();
+            let tile0 = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+            let tile1 = new Tile(ROAD, ROAD, GRASS, GRASS, 'assets/img/loseta-1.jpeg');
+            map.add(tile0, 0,0);
+            let isPossible = map.add(tile1, -1,0);
+            
+            assertEqual(map.size(),1);
+            assertEqual(isPossible,false);
+        });
+
+        it('No se puede agregar un tile al mapa en diagonal', () => {
+            let map = new CarcassonneMap();
+            let tile0 = new Tile(ROAD, ROAD, CITY, GRASS, 'imageUri');
+            let tile1 = new Tile(ROAD, ROAD, GRASS, GRASS, 'assets/img/loseta-1.jpeg');
+            map.add(tile0, 0,0);
+            let isPossible = map.add(tile1, 1,1);
+            
+            assertEqual(map.size(),1);
+            assertEqual(isPossible,false);
+        });
+    </script>
+</body>
+
+</html>
