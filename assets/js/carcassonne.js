@@ -94,32 +94,42 @@ class CarcassonneMap {
         const LEFT = 2;
         const RIGHT = 3;
 
+        let counter = 0;
+        let validCounter = 0;
+
         positions.forEach((position, index) => {
             if (this.tiles.has(position)) {
+                counter++;
                 let neighbourTile = this.tiles.get(position);
 
                 if (index == UP && tile.up == neighbourTile.down) {
                     isValid = true;
+                    validCounter++;
                 }
 
                 if (index == DOWN && tile.down == neighbourTile.up) {
                     isValid = true;
+                    validCounter++;
                 }
 
                 if (index == LEFT && tile.left == neighbourTile.right) {
                     isValid = true;
+                    validCounter++;
                 }
 
                 if (index == RIGHT && tile.right == neighbourTile.left) {
                     isValid = true;
+                    validCounter++;
                 }
             }
         });
 
-        if (isValid) {
+        if (counter != 0 && validCounter == counter) {
             this.tiles.set(this._getKey(x, y), tile);
+            return true;
         }
-        return isValid;
+
+        return false;
     }
 
     size() {
@@ -171,8 +181,135 @@ GameApp.buildGrid = function (size) {
     });
 }
 
+GameApp.createDeck = function() {
+    let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'assets/img/loseta-0.jpeg');
+    let tile1 = new Tile(GRASS, GRASS, ROAD, ROAD, 'assets/img/loseta-1.jpeg');
+    let tile2 = new Tile(ROAD, CITY, ROAD, CITY, 'assets/img/loseta-2.jpeg');
+    let tile3 = new Tile(GRASS, ROAD, ROAD, ROAD, 'assets/img/loseta-3.jpeg');
+    let tile4 = new Tile(ROAD, CITY, CITY, ROAD, 'assets/img/loseta-4.jpeg');
+
+    return [
+        tile0,
+        tile1,
+        tile2,
+        tile3,
+        tile4,
+    ]
+}
+
+GameApp.bindEvents = function() {
+    GameApp.settings.BTN_ROTATE_TILE.addEventListener(
+        "click", function() {
+        GameApp.rotateTile();
+    });
+
+    GameApp.settings.GRID_CONTAINER.addEventListener("click", function(e) {
+
+        let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
+
+        if (e.target.classList.contains("grid-item")) {
+            gridItems.forEach(element => {
+                element.style.backgroundColor = '#ccc';
+                element.innerHTML = '';
+            })
+    
+            console.log(e.target);
+            const img = document.createElement('img');
+            img.src = GameApp.settings.TILE_IMG.src;
+            let rotation = GameApp.settings.TILE_IMG.dataset.rotation;
+            img.style.transform = `rotate(${rotation}deg)`;
+            e.target.appendChild(img);
+            console.log("Posicion x, y",e.target.dataset.x, e.target.dataset.y)
+            GameApp.currentPositionX = e.target.dataset.x;
+            GameApp.currentPositionY = e.target.dataset.y;
+        }
+
+    });
+
+    GameApp.settings.BTN_PLACE_TILE.addEventListener(
+        "click", function() {
+        console.log("colocar");
+        console.log('**************************');
+        console.log(GameApp.tileIndex);
+        console.log(GameApp.deck[GameApp.tileIndex]);
+        console.log(GameApp.map);
+        console.log(GameApp.currentPositionX);
+        console.log(GameApp.currentPositionY);
+        console.log('**************************');
+
+        let isPositionSet = GameApp.currentPositionX !== null && GameApp.currentPositionY !== null
+    
+        if (!isPositionSet) {
+            alert("No hay posicion");
+            return;
+        }
+        // console.log("===========Agregar Mapa==============");
+        // console.log(map.add(tileDeck[tileIndex], parseInt(currentTilePositionX),parseInt(currentTilePositionY)))
+        // console.log("===========Agregar Mapa=========");
+        // tileDeck[tileIndex].printTile();
+        // console.log(map.graph);
+    
+        let isValid = GameApp.map.add(
+            GameApp.deck[GameApp.tileIndex], 
+            parseInt(GameApp.currentPositionX),
+            parseInt(GameApp.currentPositionY)
+        );
+    
+        if (isValid) {
+            const place = document.getElementById(`place_${GameApp.currentPositionX}x${GameApp.currentPositionY}y`);
+            place.classList.add("block-item");
+            GameApp.tileIndex++;
+            // console.log("Inidice:", tileIndex);
+            // console.log("Deck length:", tileDeck.length);
+        } else {
+            console.log(GameApp.deck[GameApp.tileIndex]);
+            alert("No se puede poner la loseta en esta posicion");
+        }
+    
+        // TODO: Quitar el boton cuando no haya mas losetas
+        if (GameApp.tileIndex < GameApp.deck.length) {
+            GameApp.settings.TILE_IMG.src = GameApp.deck[GameApp.tileIndex].image;
+        } else {
+            alert("No hay mas loseta");
+        }
+        
+    });
+};
+
+GameApp.rotateTile = function() {
+    GameApp.deck[GameApp.tileIndex] = GameApp.deck[GameApp.tileIndex].rotate();
+
+    let currentRotation = GameApp.settings.TILE_IMG.dataset.rotation;
+    console.log("CurrentRotation:",currentRotation);
+    if (currentRotation == undefined) {
+        currentRotation = 0;
+    }
+    currentRotation = parseInt(currentRotation);
+    currentRotation += 90
+    GameApp.settings.TILE_IMG.style.transform = `rotate(${currentRotation}deg)`;
+    GameApp.settings.TILE_IMG.dataset.rotation = currentRotation;
+
+    let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
+    gridItems.forEach(element => {    
+        element.style.backgroundColor = '#ccc';
+        element.innerHTML = '';
+    });
+};
+
 GameApp.init = function() {
+    GameApp.tileIndex = 0;
+    GameApp.currentPositionX = null;
+    GameApp.currentPositionY = null;
+
+    GameApp.map = new CarcassonneMap();
+    GameApp.deck = GameApp.createDeck();
+
+    GameApp.map.add(GameApp.deck[GameApp.tileIndex], 0, 0);
+    GameApp.tileIndex++;
+    GameApp.settings.TILE_IMG.src = GameApp.deck[GameApp.tileIndex].image;
+
     GameApp.buildGrid(3);
+    GameApp.bindEvents();
 }
 
 GameApp.init();

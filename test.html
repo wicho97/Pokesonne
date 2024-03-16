@@ -382,6 +382,25 @@
             assertEqual(map.size(),4);
             assertEqual(isPossible,false);
         });
+
+        it('Agregando 4 tiles consecutivos y el ultimo no se puede agregar', () => {
+            let map = new CarcassonneMap();
+            let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'imageUri');
+            let tile1 = new Tile(GRASS, GRASS, ROAD, ROAD, 'assets/img/loseta-1.jpeg');
+            let tile2 = new Tile(ROAD, CITY, ROAD, CITY, 'assets/img/loseta-2.jpeg');
+            let tile3 = new Tile(GRASS, ROAD, ROAD, ROAD, 'assets/img/loseta-3.jpeg');
+            let tile4 = new Tile(ROAD, CITY, CITY, ROAD, 'assets/img/loseta-4.jpeg');
+
+            map.add(tile0, 0,0);
+            map.add(tile1, 1,0);
+            map.add(tile2, 0,1);
+            map.add(tile3, -1,0);
+            
+            let isPossible = map.add(tile4, 1,1);
+            
+            assertEqual(map.size(),4);
+            assertEqual(isPossible,false);
+        });
     </script>
 </body>
 
