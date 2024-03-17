@@ -4,6 +4,7 @@
 
 <script src="assets/js/carcassonne.js"></script>
 <script src="assets/js/test_micro_framework.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 <link rel="stylesheet" href="assets/css/test_micro_framework.css">
 
 <body>
@@ -400,6 +401,35 @@
             
             assertEqual(map.size(),4);
             assertEqual(isPossible,false);
+        });
+
+        // it('Obteniendo la frontera del tile inicial', () => {
+        //     let map = new CarcassonneMap();
+        //     let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'imageUri');
+
+        //     map.add(tile0, 0,0);
+        //     let frontier = map.getFrontier();
+
+        //     assertEqual(map.size(), 1);
+        //     assertEqual(frontier.size, 4)
+        // });
+
+        it('Obteniendo la x, y a partir de la llave', () => {
+            let map = new CarcassonneMap();
+            let position = map._getXYFromString('(1, 1)');
+            
+            assertEqual(position[0], 1);
+            assertEqual(position[1], 1);
+
+            position = map._getXYFromString('(-1, -10)');
+            
+            assertEqual(position[0], -1);
+            assertEqual(position[1], -10);
+
+            position = map._getXYFromString('(-5,-1)');
+            
+            assertEqual(position[0], -5);
+            assertEqual(position[1], -1);
         });
     </script>
 </body>

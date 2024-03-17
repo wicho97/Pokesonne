@@ -139,6 +139,29 @@ class CarcassonneMap {
     get(x, y) {
         return this.tiles.get(this._getKey(x, y));
     }
+
+    _getXYFromString(position) {
+        position = position.split(',');
+        return position.map((value) => parseInt(value.replace('(', '').replace(')', '').trim()));
+    };
+
+    getFrontier() {
+        let frontier = new Set();
+        let directions = [[-1,0],[1,0],[0,1],[0,-1]]; 
+        // (1, 1), (-1, 1)
+        let keys = this.tiles.keys();
+
+        directions.forEach(direction => {
+            // si direction[0] + x, direction[1] + y en Set no se agrega de lo contrario se agrega
+            let key = this._getKey(direction[0] + x, direction[1] + y);
+            if (!this.tiles.has()) {
+                frontier.add(key);
+            }
+            // createGrid(direction[0] + x, direction[1] + y);
+        });
+
+        return frontier;
+    }
 }
 
 var GameApp = GameApp || {}
@@ -148,6 +171,24 @@ GameApp.settings = {
     BTN_ROTATE_TILE: document.getElementById("rotate-tile"),
     BTN_PLACE_TILE: document.getElementById('place-tile'),
     GRID_CONTAINER: document.getElementById("grid-container"),
+}
+GameApp.buildDynamicGrid = function() {
+    GameApp.createGrid(0, 0);
+};
+
+GameApp.createGrid = function(x, y) {
+    const grid = document.createElement('div');
+        
+    grid.dataset.x = x;
+    grid.dataset.y = y;
+    grid.setAttribute("id", `place_${x}x${y}y`);
+    
+    grid.classList.add('grid-item');
+    grid.style.left = `${60 * x}px`;
+    grid.style.top = `${-60 * y}px`;
+    
+    grid.innerHTML = `(${x},${y})`;
+    GameApp.settings.GRID_CONTAINER.appendChild(grid);
 }
 
 GameApp.buildGrid = function (size) {
@@ -206,28 +247,28 @@ GameApp.bindEvents = function() {
         GameApp.rotateTile();
     });
 
-    GameApp.settings.GRID_CONTAINER.addEventListener("click", function(e) {
+    // GameApp.settings.GRID_CONTAINER.addEventListener("click", function(e) {
 
-        let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
+    //     let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
 
-        if (e.target.classList.contains("grid-item")) {
-            gridItems.forEach(element => {
-                element.style.backgroundColor = '#ccc';
-                element.innerHTML = '';
-            })
+    //     if (e.target.classList.contains("grid-item")) {
+    //         gridItems.forEach(element => {
+    //             element.style.backgroundColor = '#ccc';
+    //             element.innerHTML = '';
+    //         })
     
-            console.log(e.target);
-            const img = document.createElement('img');
-            img.src = GameApp.settings.TILE_IMG.src;
-            let rotation = GameApp.settings.TILE_IMG.dataset.rotation;
-            img.style.transform = `rotate(${rotation}deg)`;
-            e.target.appendChild(img);
-            console.log("Posicion x, y",e.target.dataset.x, e.target.dataset.y)
-            GameApp.currentPositionX = e.target.dataset.x;
-            GameApp.currentPositionY = e.target.dataset.y;
-        }
+    //         console.log(e.target);
+    //         const img = document.createElement('img');
+    //         img.src = GameApp.settings.TILE_IMG.src;
+    //         let rotation = GameApp.settings.TILE_IMG.dataset.rotation;
+    //         img.style.transform = `rotate(${rotation}deg)`;
+    //         e.target.appendChild(img);
+    //         console.log("Posicion x, y",e.target.dataset.x, e.target.dataset.y)
+    //         GameApp.currentPositionX = e.target.dataset.x;
+    //         GameApp.currentPositionY = e.target.dataset.y;
+    //     }
 
-    });
+    // });
 
     GameApp.settings.BTN_PLACE_TILE.addEventListener(
         "click", function() {
@@ -277,6 +318,25 @@ GameApp.bindEvents = function() {
         }
         
     });
+
+    GameApp.settings.GRID_CONTAINER.addEventListener("click", function(e) {
+        let element = e.target;
+        // Cuando de clickea el elemento hay que agrarlo al conjunto
+        console.log(element);
+        let x = parseInt(element.dataset.x);
+        let y = parseInt(element.dataset.y);
+        // izquierda, derecha, arriba, abajo
+        let directions = [[-1,0],[1,0],[0,1],[0,-1]]; 
+        directions.forEach(direction => {
+            // si direction[0] + x, direction[1] + y en Set no se agrega de lo contrario se agrega
+            let key = generateKey(direction[0] + x, direction[1] + y);
+            if (!boardSet.has(key)) {
+                GameApp.createGrid(direction[0] + x, direction[1] + y);
+                boardSet.add(key);
+            }
+            // createGrid(direction[0] + x, direction[1] + y);
+        });
+    });
 };
 
 GameApp.rotateTile = function() {
@@ -311,7 +371,8 @@ GameApp.init = function() {
     GameApp.tileIndex++;
     GameApp.settings.TILE_IMG.src = GameApp.deck[GameApp.tileIndex].image;
 
-    GameApp.buildGrid(5);
+    // GameApp.buildGrid(5);
+    GameApp.buildDynamicGrid();
     GameApp.bindEvents();
 }
 

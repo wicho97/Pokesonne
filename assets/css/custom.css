@@ -27,7 +27,7 @@ button {
     height: 200px;
     width: 200px;
 }
-.grid-container {
+/* .grid-container {
     width: 500px;
     margin: 20px auto;
     display: grid;
@@ -42,6 +42,26 @@ button {
     height: 200px;
     width: 200px;    
     cursor: pointer;    
+} */
+
+.grid-container {
+    margin-top: 300px !important;
+    width: 500px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 0fr);
+    grid-template-rows: repeat(3, 0fr);
+    gap: 1px;
+    position: relative;
+}
+
+.grid-item {        
+    background-color: #ccc; 
+    /* border: 1px solid #000;  */
+    height: 60px;
+    width: 60px;    
+    cursor: pointer;
+    position: absolute;    
 }
 
 img {
