@@ -188,13 +188,16 @@ GameApp.createDeck = function() {
     let tile3 = new Tile(GRASS, ROAD, ROAD, ROAD, 'assets/img/loseta-3.jpeg');
     let tile4 = new Tile(ROAD, CITY, CITY, ROAD, 'assets/img/loseta-4.jpeg');
 
-    return [
-        tile0,
+    let tiles = [
         tile1,
         tile2,
         tile3,
         tile4,
     ]
+
+    tiles = _.shuffle(tiles)
+
+    return [tile0].concat(tiles)
 }
 
 GameApp.bindEvents = function() {
@@ -308,7 +311,7 @@ GameApp.init = function() {
     GameApp.tileIndex++;
     GameApp.settings.TILE_IMG.src = GameApp.deck[GameApp.tileIndex].image;
 
-    GameApp.buildGrid(3);
+    GameApp.buildGrid(5);
     GameApp.bindEvents();
 }
 
