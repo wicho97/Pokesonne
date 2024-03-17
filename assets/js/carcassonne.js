@@ -151,14 +151,17 @@ class CarcassonneMap {
         // (1, 1), (-1, 1)
         let keys = this.tiles.keys();
 
-        directions.forEach(direction => {
-            // si direction[0] + x, direction[1] + y en Set no se agrega de lo contrario se agrega
-            let key = this._getKey(direction[0] + x, direction[1] + y);
-            if (!this.tiles.has()) {
-                frontier.add(key);
-            }
-            // createGrid(direction[0] + x, direction[1] + y);
-        });
+        keys.forEach(key => {
+            let xy = this._getXYFromString(key);
+            directions.forEach(direction => {
+                // si direction[0] + x, direction[1] + y en Set no se agrega de lo contrario se agrega
+                let _key = this._getKey(direction[0] + xy[0], direction[1] + xy[1]);
+                if (!this.tiles.has(_key)) {
+                    frontier.add(_key);
+                }
+                // createGrid(direction[0] + x, direction[1] + y);
+            });
+        })
 
         return frontier;
     }

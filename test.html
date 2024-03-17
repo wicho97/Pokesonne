@@ -403,16 +403,16 @@
             assertEqual(isPossible,false);
         });
 
-        // it('Obteniendo la frontera del tile inicial', () => {
-        //     let map = new CarcassonneMap();
-        //     let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'imageUri');
+        it('Obteniendo la frontera del tile inicial', () => {
+            let map = new CarcassonneMap();
+            let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'imageUri');
 
-        //     map.add(tile0, 0,0);
-        //     let frontier = map.getFrontier();
+            map.add(tile0, 0,0);
+            let frontier = map.getFrontier();
 
-        //     assertEqual(map.size(), 1);
-        //     assertEqual(frontier.size, 4)
-        // });
+            assertEqual(map.size(), 1);
+            assertEqual(frontier.size, 4)
+        });
 
         it('Obteniendo la x, y a partir de la llave', () => {
             let map = new CarcassonneMap();
@@ -430,6 +430,34 @@
             
             assertEqual(position[0], -5);
             assertEqual(position[1], -1);
+        });
+
+        it('Obteniendo la frontera con 2 tiles', () => {
+            let map = new CarcassonneMap();
+            let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'imageUri');
+            let tile1 = new Tile(GRASS, GRASS, ROAD, ROAD, 'assets/img/loseta-1.jpeg');
+
+            map.add(tile0, 0,0);
+            map.add(tile1, 1,0);
+            let frontier = map.getFrontier();
+
+            assertEqual(map.size(), 2);
+            assertEqual(frontier.size, 6)
+        });
+
+        it('Obteniendo la frontera con 3 tiles', () => {
+            let map = new CarcassonneMap();
+            let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'imageUri');
+            let tile1 = new Tile(GRASS, GRASS, ROAD, ROAD, 'assets/img/loseta-1.jpeg');
+            let tile2 = new Tile(ROAD, CITY, ROAD, CITY, 'assets/img/loseta-2.jpeg');
+
+            map.add(tile0, 0,0);
+            map.add(tile1, 1,0);
+            map.add(tile2, 0,1);
+            let frontier = map.getFrontier();
+
+            assertEqual(map.size(), 3);
+            assertEqual(frontier.size, 7)
         });
     </script>
 </body>
