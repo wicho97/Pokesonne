@@ -180,6 +180,7 @@ GameApp.buildDynamicGrid = function() {
 };
 
 GameApp.createGrid = function(x, y) {
+    console.log("Lamando x,y", x, y);
     const grid = document.createElement('div');
         
     grid.dataset.x = x;
@@ -202,37 +203,6 @@ GameApp.createGrid = function(x, y) {
     GameApp.settings.GRID_CONTAINER.appendChild(grid);
 }
 
-GameApp.buildGrid = function (size) {
-    let limit = Math.floor(size / 2);
-    let cords = [];
-
-    for (let i = -limit; i <= limit; i++) {
-        for (let j = limit; j >= -limit; j--) {
-            cords.push([j, i]);
-        }
-    }
-
-    cords = cords.reverse();
-
-    cords.forEach(element => {
-        const grid = document.createElement('div');
-        grid.classList.add("grid-item");
-        grid.dataset.x = element[0];
-        grid.dataset.y = element[1];
-        grid.setAttribute("id", `place_${element[0]}x${element[1]}y`);
-
-        if (element[0] == 0 && element[1] == 0) {
-            // <div class="grid-item block-item" id="place_0x0y" data-x="0" data-y="0"><img src="assets/img/loseta-0.jpeg" alt=""></div>
-            grid.classList.add("block-item");
-            const img = document.createElement('img');
-            img.src = GameApp.settings.INITIAL_TILE.image;
-            grid.appendChild(img);
-        }
-
-        GameApp.settings.GRID_CONTAINER.appendChild(grid);
-    });
-}
-
 GameApp.createDeck = function() {
     let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'assets/img/loseta-0.jpeg');
     let tile1 = new Tile(GRASS, GRASS, ROAD, ROAD, 'assets/img/loseta-1.jpeg');
@@ -245,6 +215,11 @@ GameApp.createDeck = function() {
         tile2,
         tile3,
         tile4,
+        tile1,
+        tile2,
+        tile3,
+        tile4,
+        tile0,
     ]
 
     tiles = _.shuffle(tiles)
@@ -264,17 +239,18 @@ GameApp.bindEvents = function() {
 
         if (e.target.classList.contains("grid-item")) {
             gridItems.forEach(element => {
+                // Limpiando el tile
                 element.style.backgroundColor = '#ccc';
                 element.innerHTML = '';
             })
     
-            console.log(e.target);
+            // console.log(e.target);
             const img = document.createElement('img');
             img.src = GameApp.settings.TILE_IMG.src;
             let rotation = GameApp.settings.TILE_IMG.dataset.rotation;
             img.style.transform = `rotate(${rotation}deg)`;
             e.target.appendChild(img);
-            console.log("Posicion x, y",e.target.dataset.x, e.target.dataset.y)
+            // console.log("Posicion x, y",e.target.dataset.x, e.target.dataset.y)
             GameApp.currentPositionX = e.target.dataset.x;
             GameApp.currentPositionY = e.target.dataset.y;
         }
@@ -283,14 +259,14 @@ GameApp.bindEvents = function() {
 
     GameApp.settings.BTN_PLACE_TILE.addEventListener(
         "click", function() {
-        console.log("colocar");
-        console.log('**************************');
-        console.log(GameApp.tileIndex);
-        console.log(GameApp.deck[GameApp.tileIndex]);
-        console.log(GameApp.map);
-        console.log(GameApp.currentPositionX);
-        console.log(GameApp.currentPositionY);
-        console.log('**************************');
+        // console.log("colocar");
+        // console.log('**************************');
+        // console.log(GameApp.tileIndex);
+        // console.log(GameApp.deck[GameApp.tileIndex]);
+        // console.log(GameApp.map);
+        // console.log(GameApp.currentPositionX);
+        // console.log(GameApp.currentPositionY);
+        // console.log('**************************');
 
         let isPositionSet = GameApp.currentPositionX !== null && GameApp.currentPositionY !== null
     
@@ -313,48 +289,47 @@ GameApp.bindEvents = function() {
         if (isValid) {
             const place = document.getElementById(`place_${GameApp.currentPositionX}x${GameApp.currentPositionY}y`);
             place.classList.add("block-item");
+            const img = document.createElement('img');
+            img.src = GameApp.deck[GameApp.tileIndex].image;
+            place.innerHTML = '';
+            place.append(img);
             GameApp.tileIndex++;
+            // console.log("Place", place);
             // console.log("Inidice:", tileIndex);
             // console.log("Deck length:", tileDeck.length);
         } else {
-            console.log(GameApp.deck[GameApp.tileIndex]);
+            // console.log(GameApp.deck[GameApp.tileIndex]);
             alert("No se puede poner la loseta en esta posicion");
         }
     
         // TODO: Quitar el boton cuando no haya mas losetas
         if (GameApp.tileIndex < GameApp.deck.length) {
             GameApp.settings.TILE_IMG.src = GameApp.deck[GameApp.tileIndex].image;
+            // TODO: Calcular frontera
+            let frontier = GameApp.map.getFrontier();
+            // console.log('Frontier:', frontier);
+            frontier.forEach(position => {
+                // let gridExists = document.getElementById(`place_${position[0]}x${position[1]}y`) != null;
+                // console.log(gridExists); 
+                // TODO: No se deberia recrear el grid cuando esta creado
+                let isInSet = GameApp.gridItemsSet.has(`(${position[0]}, ${position[1]})`);
+                if (!isInSet) {
+                    GameApp.createGrid(position[0], position[1]);
+                    GameApp.gridItemsSet.add(`(${position[0]}, ${position[1]})`);
+                }
+            })
         } else {
             alert("No hay mas loseta");
         }
         
     });
-
-    // GameApp.settings.GRID_CONTAINER.addEventListener("click", function(e) {
-    //     let element = e.target;
-    //     // Cuando de clickea el elemento hay que agrarlo al conjunto
-    //     console.log(element);
-    //     let x = parseInt(element.dataset.x);
-    //     let y = parseInt(element.dataset.y);
-    //     // izquierda, derecha, arriba, abajo
-    //     let directions = [[-1,0],[1,0],[0,1],[0,-1]]; 
-    //     directions.forEach(direction => {
-    //         // si direction[0] + x, direction[1] + y en Set no se agrega de lo contrario se agrega
-    //         let key = generateKey(direction[0] + x, direction[1] + y);
-    //         if (!boardSet.has(key)) {
-    //             GameApp.createGrid(direction[0] + x, direction[1] + y);
-    //             boardSet.add(key);
-    //         }
-    //         // createGrid(direction[0] + x, direction[1] + y);
-    //     });
-    // });
 };
 
 GameApp.rotateTile = function() {
     GameApp.deck[GameApp.tileIndex] = GameApp.deck[GameApp.tileIndex].rotate();
 
     let currentRotation = GameApp.settings.TILE_IMG.dataset.rotation;
-    console.log("CurrentRotation:",currentRotation);
+    // console.log("CurrentRotation:",currentRotation);
     if (currentRotation == undefined) {
         currentRotation = 0;
     }
@@ -376,18 +351,20 @@ GameApp.init = function() {
     GameApp.currentPositionY = null;
 
     GameApp.map = new CarcassonneMap();
+    GameApp.gridItemsSet = new Set();
     GameApp.deck = GameApp.createDeck();
 
     GameApp.map.add(GameApp.deck[GameApp.tileIndex], 0, 0);
+    GameApp.gridItemsSet.add('(0, 0)');
     let frontier = GameApp.map.getFrontier();
-    console.log(frontier);
-    frontier.forEach(postition => {
-        GameApp.createGrid(postition[0], postition[1])
+    // console.log(frontier);
+    frontier.forEach(position => {
+        GameApp.createGrid(position[0], position[1])
+        GameApp.gridItemsSet.add(`(${position[0]}, ${position[1]})`);
     })
     GameApp.tileIndex++;
     GameApp.settings.TILE_IMG.src = GameApp.deck[GameApp.tileIndex].image;
 
-    // GameApp.buildGrid(5);
     GameApp.buildDynamicGrid();
     GameApp.bindEvents();
 }
