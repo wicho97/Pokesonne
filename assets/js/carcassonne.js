@@ -157,7 +157,7 @@ class CarcassonneMap {
                 // si direction[0] + x, direction[1] + y en Set no se agrega de lo contrario se agrega
                 let _key = this._getKey(direction[0] + xy[0], direction[1] + xy[1]);
                 if (!this.tiles.has(_key)) {
-                    frontier.add(_key);
+                    frontier.add([direction[0] + xy[0], direction[1] + xy[1]]);
                 }
                 // createGrid(direction[0] + x, direction[1] + y);
             });
@@ -187,10 +187,18 @@ GameApp.createGrid = function(x, y) {
     grid.setAttribute("id", `place_${x}x${y}y`);
     
     grid.classList.add('grid-item');
-    grid.style.left = `${60 * x}px`;
-    grid.style.top = `${-60 * y}px`;
+    grid.style.left = `${200 * x}px`;
+    grid.style.top = `${-200 * y}px`;
+
+    if (x == 0 && y == 0) {
+        // <div class="grid-item block-item" id="place_0x0y" data-x="0" data-y="0"><img src="assets/img/loseta-0.jpeg" alt=""></div>
+        grid.classList.add("block-item");
+        const img = document.createElement('img');
+        img.src = GameApp.deck[0].image;
+        grid.appendChild(img);
+    }
     
-    grid.innerHTML = `(${x},${y})`;
+    // grid.innerHTML = `(${x},${y})`;
     GameApp.settings.GRID_CONTAINER.appendChild(grid);
 }
 
@@ -250,28 +258,28 @@ GameApp.bindEvents = function() {
         GameApp.rotateTile();
     });
 
-    // GameApp.settings.GRID_CONTAINER.addEventListener("click", function(e) {
+    GameApp.settings.GRID_CONTAINER.addEventListener("click", function(e) {
 
-    //     let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
+        let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
 
-    //     if (e.target.classList.contains("grid-item")) {
-    //         gridItems.forEach(element => {
-    //             element.style.backgroundColor = '#ccc';
-    //             element.innerHTML = '';
-    //         })
+        if (e.target.classList.contains("grid-item")) {
+            gridItems.forEach(element => {
+                element.style.backgroundColor = '#ccc';
+                element.innerHTML = '';
+            })
     
-    //         console.log(e.target);
-    //         const img = document.createElement('img');
-    //         img.src = GameApp.settings.TILE_IMG.src;
-    //         let rotation = GameApp.settings.TILE_IMG.dataset.rotation;
-    //         img.style.transform = `rotate(${rotation}deg)`;
-    //         e.target.appendChild(img);
-    //         console.log("Posicion x, y",e.target.dataset.x, e.target.dataset.y)
-    //         GameApp.currentPositionX = e.target.dataset.x;
-    //         GameApp.currentPositionY = e.target.dataset.y;
-    //     }
+            console.log(e.target);
+            const img = document.createElement('img');
+            img.src = GameApp.settings.TILE_IMG.src;
+            let rotation = GameApp.settings.TILE_IMG.dataset.rotation;
+            img.style.transform = `rotate(${rotation}deg)`;
+            e.target.appendChild(img);
+            console.log("Posicion x, y",e.target.dataset.x, e.target.dataset.y)
+            GameApp.currentPositionX = e.target.dataset.x;
+            GameApp.currentPositionY = e.target.dataset.y;
+        }
 
-    // });
+    });
 
     GameApp.settings.BTN_PLACE_TILE.addEventListener(
         "click", function() {
@@ -322,24 +330,24 @@ GameApp.bindEvents = function() {
         
     });
 
-    GameApp.settings.GRID_CONTAINER.addEventListener("click", function(e) {
-        let element = e.target;
-        // Cuando de clickea el elemento hay que agrarlo al conjunto
-        console.log(element);
-        let x = parseInt(element.dataset.x);
-        let y = parseInt(element.dataset.y);
-        // izquierda, derecha, arriba, abajo
-        let directions = [[-1,0],[1,0],[0,1],[0,-1]]; 
-        directions.forEach(direction => {
-            // si direction[0] + x, direction[1] + y en Set no se agrega de lo contrario se agrega
-            let key = generateKey(direction[0] + x, direction[1] + y);
-            if (!boardSet.has(key)) {
-                GameApp.createGrid(direction[0] + x, direction[1] + y);
-                boardSet.add(key);
-            }
-            // createGrid(direction[0] + x, direction[1] + y);
-        });
-    });
+    // GameApp.settings.GRID_CONTAINER.addEventListener("click", function(e) {
+    //     let element = e.target;
+    //     // Cuando de clickea el elemento hay que agrarlo al conjunto
+    //     console.log(element);
+    //     let x = parseInt(element.dataset.x);
+    //     let y = parseInt(element.dataset.y);
+    //     // izquierda, derecha, arriba, abajo
+    //     let directions = [[-1,0],[1,0],[0,1],[0,-1]]; 
+    //     directions.forEach(direction => {
+    //         // si direction[0] + x, direction[1] + y en Set no se agrega de lo contrario se agrega
+    //         let key = generateKey(direction[0] + x, direction[1] + y);
+    //         if (!boardSet.has(key)) {
+    //             GameApp.createGrid(direction[0] + x, direction[1] + y);
+    //             boardSet.add(key);
+    //         }
+    //         // createGrid(direction[0] + x, direction[1] + y);
+    //     });
+    // });
 };
 
 GameApp.rotateTile = function() {
@@ -371,6 +379,11 @@ GameApp.init = function() {
     GameApp.deck = GameApp.createDeck();
 
     GameApp.map.add(GameApp.deck[GameApp.tileIndex], 0, 0);
+    let frontier = GameApp.map.getFrontier();
+    console.log(frontier);
+    frontier.forEach(postition => {
+        GameApp.createGrid(postition[0], postition[1])
+    })
     GameApp.tileIndex++;
     GameApp.settings.TILE_IMG.src = GameApp.deck[GameApp.tileIndex].image;
 
