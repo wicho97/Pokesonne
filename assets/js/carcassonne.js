@@ -291,6 +291,12 @@ GameApp.bindEvents = function() {
             place.classList.add("block-item");
             const img = document.createElement('img');
             img.src = GameApp.deck[GameApp.tileIndex].image;
+            let currentRotation = GameApp.settings.TILE_IMG.dataset.rotation;
+            console.log("currentRotation", currentRotation);
+            if (currentRotation != undefined) {
+                img.style.transform = `rotate(${currentRotation}deg)`;
+                img.dataset.rotation = currentRotation;
+            }
             place.innerHTML = '';
             place.append(img);
             GameApp.tileIndex++;
@@ -300,11 +306,14 @@ GameApp.bindEvents = function() {
         } else {
             // console.log(GameApp.deck[GameApp.tileIndex]);
             alert("No se puede poner la loseta en esta posicion");
+            return;
         }
     
         // TODO: Quitar el boton cuando no haya mas losetas
         if (GameApp.tileIndex < GameApp.deck.length) {
             GameApp.settings.TILE_IMG.src = GameApp.deck[GameApp.tileIndex].image;
+            GameApp.settings.TILE_IMG.style.transform = '';
+            GameApp.settings.TILE_IMG.dataset.rotation = '';
             // TODO: Calcular frontera
             let frontier = GameApp.map.getFrontier();
             // console.log('Frontier:', frontier);
@@ -326,11 +335,13 @@ GameApp.bindEvents = function() {
 };
 
 GameApp.rotateTile = function() {
+    console.log("Antes de rotar", GameApp.deck[GameApp.tileIndex]);
     GameApp.deck[GameApp.tileIndex] = GameApp.deck[GameApp.tileIndex].rotate();
+    console.log("despues de rotar", GameApp.deck[GameApp.tileIndex]);
 
     let currentRotation = GameApp.settings.TILE_IMG.dataset.rotation;
-    // console.log("CurrentRotation:",currentRotation);
-    if (currentRotation == undefined) {
+    console.log("CurrentRotation:",currentRotation);
+    if (currentRotation == undefined || currentRotation == '') {
         currentRotation = 0;
     }
     currentRotation = parseInt(currentRotation);

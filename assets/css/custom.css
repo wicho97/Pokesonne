@@ -16,11 +16,15 @@ button {
     padding: 2px 12px;
     font-weight: bold;
 }
-.section-1 {
-    width: 400px;
-    margin: 0 auto;
+.sidebar {
+    position: absolute;
+    right: 0;
+    height: 400px;
+    background: rgb(164, 154, 154);
+    padding: 25px;
+    height: 100%;
 }
-.section-1 img {
+.sidebar img {
     display: block;
     text-align: center;
     transition: all .3s ease-in;
@@ -45,14 +49,23 @@ button {
 } */
 
 .grid-container {
-    margin-top: 600px !important;
+    /* margin-top: 600px !important;
     width: 500px;
     margin: 20px auto;
     display: grid;
     grid-template-columns: repeat(3, 0fr);
     grid-template-rows: repeat(3, 0fr);
     gap: 1px;
-    position: relative;
+    position: relative; */
+
+    position: fixed;
+    height: 100vh;
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    font: 700 12px system-ui;
 }
 
 .grid-item {        
@@ -69,6 +82,9 @@ img {
     width: 200px;
 }
 
+#current-tile {
+    margin-bottom: 20px;
+}
 
 /* Responsive */
 
