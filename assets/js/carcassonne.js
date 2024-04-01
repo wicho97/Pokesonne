@@ -236,6 +236,7 @@ GameApp.bindEvents = function() {
     GameApp.settings.GRID_CONTAINER.addEventListener("click", function(e) {
 
         let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
+        // let tileInPlace = document.querySelectorAll(".current");
 
         if (e.target.classList.contains("grid-item")) {
             gridItems.forEach(element => {
@@ -249,10 +250,28 @@ GameApp.bindEvents = function() {
             img.src = GameApp.settings.TILE_IMG.src;
             let rotation = GameApp.settings.TILE_IMG.dataset.rotation;
             img.style.transform = `rotate(${rotation}deg)`;
+            img.classList.add("current");
             e.target.appendChild(img);
             // console.log("Posicion x, y",e.target.dataset.x, e.target.dataset.y)
             GameApp.currentPositionX = e.target.dataset.x;
             GameApp.currentPositionY = e.target.dataset.y;
+        }
+
+        if (e.target.classList.contains("current")) {
+            console.log("clickeando current");
+            GameApp.rotateTile();
+            let currentRotation = GameApp.settings.TILE_IMG.dataset.rotation;
+            console.log("currentRotation", currentRotation);
+            if (currentRotation != undefined) {
+                e.target.style.transform = `rotate(${currentRotation}deg)`;
+                e.target.dataset.rotation = currentRotation;
+            }
+
+            // gridItileInPlacetems.forEach(element => {
+            //     // Limpiando el tile
+            //     element.style.backgroundColor = '#ccc';
+            //     element.innerHTML = '';
+            // })
         }
 
     });
@@ -349,11 +368,11 @@ GameApp.rotateTile = function() {
     GameApp.settings.TILE_IMG.style.transform = `rotate(${currentRotation}deg)`;
     GameApp.settings.TILE_IMG.dataset.rotation = currentRotation;
 
-    let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
-    gridItems.forEach(element => {    
-        element.style.backgroundColor = '#ccc';
-        element.innerHTML = '';
-    });
+    // let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
+    // gridItems.forEach(element => {    
+    //     element.style.backgroundColor = '#ccc';
+    //     element.innerHTML = '';
+    // });
 };
 
 GameApp.init = function() {
