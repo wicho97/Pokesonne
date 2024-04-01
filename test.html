@@ -455,7 +455,7 @@
             map.add(tile1, 1,0);
             map.add(tile2, 0,1);
             let frontier = map.getFrontier();
-
+            console.log("Frontier",frontier);
             assertEqual(map.size(), 3);
             assertEqual(frontier.size, 7)
         });

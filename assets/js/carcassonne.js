@@ -157,7 +157,7 @@ class CarcassonneMap {
                 // si direction[0] + x, direction[1] + y en Set no se agrega de lo contrario se agrega
                 let _key = this._getKey(direction[0] + xy[0], direction[1] + xy[1]);
                 if (!this.tiles.has(_key)) {
-                    frontier.add([direction[0] + xy[0], direction[1] + xy[1]]);
+                    frontier.add(_key);
                 }
                 // createGrid(direction[0] + x, direction[1] + y);
             });
