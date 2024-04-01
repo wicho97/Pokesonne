@@ -260,18 +260,8 @@ GameApp.bindEvents = function() {
         if (e.target.classList.contains("current")) {
             console.log("clickeando current");
             GameApp.rotateTile();
-            let currentRotation = GameApp.settings.TILE_IMG.dataset.rotation;
-            console.log("currentRotation", currentRotation);
-            if (currentRotation != undefined) {
-                e.target.style.transform = `rotate(${currentRotation}deg)`;
-                e.target.dataset.rotation = currentRotation;
-            }
-
-            // gridItileInPlacetems.forEach(element => {
-            //     // Limpiando el tile
-            //     element.style.backgroundColor = '#ccc';
-            //     element.innerHTML = '';
-            // })
+            let currentRotation = GameApp.ui.getCurrentTileRotation();
+            GameApp.ui.rotateImg(e.target, currentRotation);
         }
 
     });
@@ -310,12 +300,8 @@ GameApp.bindEvents = function() {
             place.classList.add("block-item");
             const img = document.createElement('img');
             img.src = GameApp.deck[GameApp.tileIndex].image;
-            let currentRotation = GameApp.settings.TILE_IMG.dataset.rotation;
-            console.log("currentRotation", currentRotation);
-            if (currentRotation != undefined) {
-                img.style.transform = `rotate(${currentRotation}deg)`;
-                img.dataset.rotation = currentRotation;
-            }
+            let currentRotation = GameApp.ui.getCurrentTileRotation();
+            GameApp.ui.rotateImg(img, currentRotation);
             place.innerHTML = '';
             place.append(img);
             GameApp.tileIndex++;
@@ -358,21 +344,31 @@ GameApp.rotateTile = function() {
     GameApp.deck[GameApp.tileIndex] = GameApp.deck[GameApp.tileIndex].rotate();
     console.log("despues de rotar", GameApp.deck[GameApp.tileIndex]);
 
+    let currentRotation = GameApp.ui.getCurrentTileRotation();
+    currentRotation += 90;
+
+    GameApp.ui.rotateImg(GameApp.settings.TILE_IMG, currentRotation);
+};
+
+GameApp.ui = {};
+
+GameApp.ui.rotateImg = function(domElement, rotation) {
+    if (rotation != undefined) {
+        domElement.style.transform = `rotate(${rotation}deg)`;
+        domElement.dataset.rotation = rotation;
+    }
+}
+
+GameApp.ui.getCurrentTileRotation = function() {
     let currentRotation = GameApp.settings.TILE_IMG.dataset.rotation;
-    console.log("CurrentRotation:",currentRotation);
+
     if (currentRotation == undefined || currentRotation == '') {
         currentRotation = 0;
     }
-    currentRotation = parseInt(currentRotation);
-    currentRotation += 90
-    GameApp.settings.TILE_IMG.style.transform = `rotate(${currentRotation}deg)`;
-    GameApp.settings.TILE_IMG.dataset.rotation = currentRotation;
 
-    // let gridItems = document.querySelectorAll(".grid-item:not(.block-item)");
-    // gridItems.forEach(element => {    
-    //     element.style.backgroundColor = '#ccc';
-    //     element.innerHTML = '';
-    // });
+    currentRotation = parseInt(currentRotation);
+
+     return currentRotation;
 };
 
 GameApp.init = function() {
