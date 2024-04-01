@@ -164,7 +164,17 @@ class CarcassonneMap {
         })
 
         return frontier;
-    }
+    };
+
+    getFrontierAsArray() {
+        let frontier = this.getFrontier();
+        let frontierAsArray = [];
+        frontier.forEach(key => {
+            let xy = this._getXYFromString(key);
+            frontierAsArray.push([xy[0],xy[1]]);
+        });
+        return frontierAsArray;
+    };
 }
 
 var GameApp = GameApp || {}
@@ -320,7 +330,7 @@ GameApp.bindEvents = function() {
             GameApp.settings.TILE_IMG.style.transform = '';
             GameApp.settings.TILE_IMG.dataset.rotation = '';
             // TODO: Calcular frontera
-            let frontier = GameApp.map.getFrontier();
+            let frontier = GameApp.map.getFrontierAsArray();
             // console.log('Frontier:', frontier);
             frontier.forEach(position => {
                 // let gridExists = document.getElementById(`place_${position[0]}x${position[1]}y`) != null;
@@ -382,7 +392,7 @@ GameApp.init = function() {
 
     GameApp.map.add(GameApp.deck[GameApp.tileIndex], 0, 0);
     GameApp.gridItemsSet.add('(0, 0)');
-    let frontier = GameApp.map.getFrontier();
+    let frontier = GameApp.map.getFrontierAsArray();
     // console.log(frontier);
     frontier.forEach(position => {
         GameApp.createGrid(position[0], position[1])
