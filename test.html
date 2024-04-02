@@ -459,6 +459,39 @@
             assertEqual(map.size(), 3);
             assertEqual(frontier.size, 7)
         });
+
+        it('Obteniendo frontera valida', () => {
+            let map = new CarcassonneMap();
+            let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'imageUri');
+            let tileIWantToPlace = new Tile(ROAD, CITY, ROAD, CITY, 'assets/img/loseta-1.jpeg');
+
+            map.add(tile0, 0,0);
+
+            let frontier = map.getValidFrontier(tileIWantToPlace);
+            console.log("Frontier",frontier);
+            assertEqual(frontier.length, 2)
+        });
+
+        it('Obteniendo frontera valida para 4 tiles en el mapa', () => {
+            let map = new CarcassonneMap();
+            let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'imageUri');
+            let tile1 = new Tile(ROAD, CITY, ROAD, CITY, 'assets/img/loseta-1.jpeg');
+            let tile2 = new Tile(ROAD, CITY, CITY, ROAD, 'assets/img/loseta-2.jpeg');
+            
+            let tileIWantToPlace = new Tile(GRASS, ROAD, ROAD, ROAD, 'assets/img/loseta-1.jpeg');
+
+            map.add(tile0, 0,0);
+            map.add(tile1, 1,0);
+            map.add(tile2, -1,0);
+
+            // 0, -1
+            // -1, 1
+            // 1, 1
+
+            let frontier = map.getValidFrontier(tileIWantToPlace);
+            console.log("Frontier",frontier);
+            assertEqual(frontier.length, 3)
+        });
     </script>
 </body>
 

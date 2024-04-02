@@ -72,11 +72,14 @@ class CarcassonneMap {
         return `(${x},${y})`;
     }
 
-    add(tile, x, y) {
+    add(tile, x, y, addToMap = true) {
         let isInInitialPosition = x == 0 && y == 0
         let isInMap = this.tiles.has(this._getKey(x, y));
         if (!isInMap && isInInitialPosition) {
-            this.tiles.set(this._getKey(x, y), tile);
+            if (addToMap) {
+                this.tiles.set(this._getKey(x, y), tile);
+            }
+        
             return true;
         }
 
@@ -125,7 +128,10 @@ class CarcassonneMap {
         });
 
         if (counter != 0 && validCounter == counter) {
-            this.tiles.set(this._getKey(x, y), tile);
+            if (addToMap) {
+                this.tiles.set(this._getKey(x, y), tile);
+            }
+            
             return true;
         }
 
@@ -175,6 +181,20 @@ class CarcassonneMap {
         });
         return frontierAsArray;
     };
+
+    getValidFrontier(tileToPlace) {
+        let frontier = this.getFrontierAsArray();
+        let validFrontier = [];
+        frontier.forEach(element => {
+            let isValid = this.add(tileToPlace, element[0], element[1], false);
+
+            if (isValid) {
+                validFrontier.push([element[0], element[1]])
+            }
+        })
+
+        return validFrontier;
+    }
 }
 
 var GameApp = GameApp || {}
