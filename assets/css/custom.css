@@ -70,6 +70,10 @@ img {
     margin-bottom: 20px;
 }
 
+.active {
+    background-color: rebeccapurple;
+}
+
 /* Responsive */
 
 @media screen and (max-width: 780px) {

@@ -378,6 +378,21 @@ GameApp.rotateTile = function() {
     currentRotation += 90;
 
     GameApp.ui.rotateImg(GameApp.settings.TILE_IMG, currentRotation);
+
+    let frontier = GameApp.map.getFrontierAsArray();
+    console.log("Valid frontier: ", frontier)
+    frontier.forEach(position => {
+        const place = document.getElementById(`place_${position[0]}x${position[1]}y`);
+        place.classList.remove("active");
+    });
+
+    let validFrontier = GameApp.map.getValidFrontier(GameApp.deck[GameApp.tileIndex])
+    console.log("Valid frontier: ", validFrontier)
+
+    validFrontier.forEach(position => {
+        const place = document.getElementById(`place_${position[0]}x${position[1]}y`);
+        place.classList.add("active");
+    });
 };
 
 GameApp.ui = {};
@@ -420,7 +435,12 @@ GameApp.init = function() {
     })
     GameApp.tileIndex++;
     GameApp.settings.TILE_IMG.src = GameApp.deck[GameApp.tileIndex].image;
-
+    let validFrontier = GameApp.map.getValidFrontier(GameApp.deck[GameApp.tileIndex])
+    console.log("Valid frontier: ", validFrontier)
+    validFrontier.forEach(position => {
+        const place = document.getElementById(`place_${position[0]}x${position[1]}y`);
+        place.classList.add("active");
+    });
     GameApp.buildDynamicGrid();
     GameApp.bindEvents();
 }
