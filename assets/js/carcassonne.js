@@ -338,6 +338,8 @@ GameApp.bindEvents = function() {
             // console.log("Place", place);
             // console.log("Inidice:", tileIndex);
             // console.log("Deck length:", tileDeck.length);
+
+            
         } else {
             // console.log(GameApp.deck[GameApp.tileIndex]);
             alert("No se puede poner la loseta en esta posicion");
@@ -362,6 +364,20 @@ GameApp.bindEvents = function() {
                     GameApp.gridItemsSet.add(`(${position[0]}, ${position[1]})`);
                 }
             })
+            
+            console.log("Valid frontier: ", frontier)
+            frontier.forEach(position => {
+                const place = document.getElementById(`place_${position[0]}x${position[1]}y`);
+                place.classList.remove("active");
+            });
+
+            let validFrontier = GameApp.map.getValidFrontier(GameApp.deck[GameApp.tileIndex])
+            console.log("Valid frontier: ", validFrontier)
+
+            validFrontier.forEach(position => {
+                const place = document.getElementById(`place_${position[0]}x${position[1]}y`);
+                place.classList.add("active");
+            });
         } else {
             alert("No hay mas loseta");
         }

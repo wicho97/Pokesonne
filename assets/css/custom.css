@@ -71,7 +71,7 @@ img {
 }
 
 .active {
-    background-color: rebeccapurple;
+    background-color: rebeccapurple !important;
 }
 
 /* Responsive */
