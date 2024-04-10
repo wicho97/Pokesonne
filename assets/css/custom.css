@@ -72,6 +72,11 @@ img {
 
 .active {
     background-color: rebeccapurple !important;
+    display: block;
+}
+
+.disabled {
+    display: none;
 }
 
 /* Responsive */

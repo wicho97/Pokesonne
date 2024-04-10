@@ -368,6 +368,7 @@ GameApp.bindEvents = function() {
             console.log("Valid frontier: ", frontier)
             frontier.forEach(position => {
                 const place = document.getElementById(`place_${position[0]}x${position[1]}y`);
+                place.classList.add("disabled");
                 place.classList.remove("active");
             });
 
@@ -376,6 +377,7 @@ GameApp.bindEvents = function() {
 
             validFrontier.forEach(position => {
                 const place = document.getElementById(`place_${position[0]}x${position[1]}y`);
+                place.classList.remove("disabled");
                 place.classList.add("active");
             });
         } else {
@@ -399,6 +401,7 @@ GameApp.rotateTile = function() {
     console.log("Valid frontier: ", frontier)
     frontier.forEach(position => {
         const place = document.getElementById(`place_${position[0]}x${position[1]}y`);
+        place.classList.add("disabled");
         place.classList.remove("active");
     });
 
@@ -407,6 +410,7 @@ GameApp.rotateTile = function() {
 
     validFrontier.forEach(position => {
         const place = document.getElementById(`place_${position[0]}x${position[1]}y`);
+        place.classList.remove("disabled");
         place.classList.add("active");
     });
 };
@@ -448,6 +452,8 @@ GameApp.init = function() {
     frontier.forEach(position => {
         GameApp.createGrid(position[0], position[1])
         GameApp.gridItemsSet.add(`(${position[0]}, ${position[1]})`);
+        const place = document.getElementById(`place_${position[0]}x${position[1]}y`);
+        place.classList.add("disabled");
     })
     GameApp.tileIndex++;
     GameApp.settings.TILE_IMG.src = GameApp.deck[GameApp.tileIndex].image;
@@ -455,6 +461,7 @@ GameApp.init = function() {
     console.log("Valid frontier: ", validFrontier)
     validFrontier.forEach(position => {
         const place = document.getElementById(`place_${position[0]}x${position[1]}y`);
+        place.classList.remove("disabled");
         place.classList.add("active");
     });
     GameApp.buildDynamicGrid();
