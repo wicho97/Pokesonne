@@ -5,27 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carcassonne</title>
+    <link rel="stylesheet" href="./node_modules/nes.css/css/nes.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <style>
+      html, body, pre, code, kbd, samp {
+          font-family: "Press Start 2P";
+      }
+    </style>
 </head>
 
 <body class="home">
-    <main class="main-content">
-        <div class="grid-container" id="grid-container"></div>
-    </main>
-    <sidebar class="sidebar">
-        <h1 class="text-center">Carcassonne</h1>
-        <div id="current-tile">
-            <img id="tile-img" src="" alt="">
-        </div>
-        <button id="rotate-tile">Rotar</button>
-        <button id="place-tile">Colocar</button>
-    </sidebar>
+    <header>
+        <!-- Encabezado de la página -->
+    </header>
 
-    <!-- <script src="assets/js/custom.js"></script> -->
+    <div class="main-content" id="main-content">
+        <!-- Contenido principal -->
+        <div class="grid-container" id="grid-container"></div>
+    </div>
+
+    <aside class="sidebar">
+        <!-- Barra lateral con información adicional -->
+        <h1 id="usage">Pokésonne</h1>
+        <div id="current-tile">
+            <img class="nes-avatar" alt="Gravatar image example" style="image-rendering: pixelated;" id="tile-img">
+        </div>
+        <button type="button" class="nes-btn is-success" id="rotate-tile">Rotate</button>
+        <button type="button" class="nes-btn is-warning" id="place-tile">Place</button>
+    </aside>
+
+    <footer>
+        <!-- Pie de página -->
+    </footer>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
+    <!-- <script src="assets/js/panzoom.js"></script> -->
     <script src="assets/js/carcassonne.js"></script>
-    <!-- <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
-    <script src="assets/js/panzoom.js"></script> -->
+    <script>
+        // just grab a DOM element
+        var element = document.querySelector('#main-content')
+
+        // And pass it to panzoom
+        panzoom(element)
+    </script>
 </body>
 
 </html>
