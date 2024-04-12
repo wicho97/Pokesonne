@@ -233,24 +233,20 @@ GameApp.createGrid = function(x, y) {
     GameApp.settings.GRID_CONTAINER.appendChild(grid);
 }
 
-GameApp.createDeck = function() {
-    let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'assets/img/loseta-0.jpeg');
-    let tile1 = new Tile(GRASS, GRASS, ROAD, ROAD, 'assets/img/loseta-1.jpeg');
-    let tile2 = new Tile(ROAD, CITY, ROAD, CITY, 'assets/img/loseta-2.jpeg');
-    let tile3 = new Tile(GRASS, ROAD, ROAD, ROAD, 'assets/img/loseta-3.jpeg');
-    let tile4 = new Tile(ROAD, CITY, CITY, ROAD, 'assets/img/loseta-4.jpeg');
+GameApp.createDeck = async function() {
+    let tile0 = new Tile(CITY, GRASS, ROAD, ROAD, 'assets/img/pokessonne/29.gif');
 
-    let tiles = [
-        tile1,
-        tile2,
-        tile3,
-        tile4,
-        tile1,
-        tile2,
-        tile3,
-        tile4,
-        tile0,
-    ]
+    let data = await fetch('./assets/js/tiles.json');
+    let pokeTiles = await data.json();
+
+    let tiles = []
+
+    pokeTiles.forEach((data) => {
+        if (!data.initial) {
+            let tile = new Tile(data.up, data.down, data.left, data.right, data.image);
+            tiles.push(tile);
+        }
+    });
 
     tiles = _.shuffle(tiles)
 
@@ -436,14 +432,14 @@ GameApp.ui.getCurrentTileRotation = function() {
      return currentRotation;
 };
 
-GameApp.init = function() {
+GameApp.init = async function() {
     GameApp.tileIndex = 0;
     GameApp.currentPositionX = null;
     GameApp.currentPositionY = null;
 
     GameApp.map = new CarcassonneMap();
     GameApp.gridItemsSet = new Set();
-    GameApp.deck = GameApp.createDeck();
+    GameApp.deck = await GameApp.createDeck();
 
     GameApp.map.add(GameApp.deck[GameApp.tileIndex], 0, 0);
     GameApp.gridItemsSet.add('(0, 0)');

@@ -77,7 +77,6 @@ button {
 .grid-item {
     height: 200px;
     width: 200px;
-    cursor: pointer;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -103,7 +102,7 @@ img {
 .active {
     background-color: #d3d3d3 !important;
     display: block;
-    border: inset 3px #848587;
+    border: inset 3px #ffffff;
 }
 
 .disabled {

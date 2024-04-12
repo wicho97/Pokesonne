@@ -1,0 +1,578 @@
+[
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/1.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/2.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/3.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/4.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/5.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/6.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/7.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/8.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/9.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/10.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/11.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/12.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/13.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/14.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/15.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/16.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/17.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/18.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/19.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/20.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/21.gif",
+        "initial": false
+    },
+    {
+        "up": "road",
+        "down": "road",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/22.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/23.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "road",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/24.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/25.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/26.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/27.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/28.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/29.gif",
+        "initial": true
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/30.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/31.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/32.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/33.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/34.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "road",
+        "right": "grass",
+        "image": "assets/img/pokessonne/35.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "grass",
+        "right": "road",
+        "image": "assets/img/pokessonne/36.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "grass",
+        "right": "road",
+        "image": "assets/img/pokessonne/37.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "grass",
+        "right": "road",
+        "image": "assets/img/pokessonne/38.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/39.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/40.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "road",
+        "right": "road",
+        "image": "assets/img/pokessonne/41.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/42.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/43.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/44.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/45.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/46.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "city",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/47.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "city",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/48.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "city",
+        "left": "grass",
+        "right": "grass",
+        "image": "assets/img/pokessonne/49.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "city",
+        "right": "grass",
+        "image": "assets/img/pokessonne/50.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "city",
+        "right": "grass",
+        "image": "assets/img/pokessonne/51.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "city",
+        "right": "city",
+        "image": "assets/img/pokessonne/52.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "city",
+        "right": "city",
+        "image": "assets/img/pokessonne/53.gif",
+        "initial": false
+    },
+    {
+        "up": "grass",
+        "down": "grass",
+        "left": "city",
+        "right": "city",
+        "image": "assets/img/pokessonne/54.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "city",
+        "right": "grass",
+        "image": "assets/img/pokessonne/55.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "city",
+        "right": "grass",
+        "image": "assets/img/pokessonne/56.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "city",
+        "right": "grass",
+        "image": "assets/img/pokessonne/57.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "city",
+        "right": "grass",
+        "image": "assets/img/pokessonne/58.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "city",
+        "right": "grass",
+        "image": "assets/img/pokessonne/59.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "city",
+        "right": "road",
+        "image": "assets/img/pokessonne/60.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "city",
+        "right": "road",
+        "image": "assets/img/pokessonne/61.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "city",
+        "right": "road",
+        "image": "assets/img/pokessonne/62.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "city",
+        "right": "road",
+        "image": "assets/img/pokessonne/63.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "city",
+        "right": "road",
+        "image": "assets/img/pokessonne/64.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "city",
+        "right": "city",
+        "image": "assets/img/pokessonne/65.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "city",
+        "right": "city",
+        "image": "assets/img/pokessonne/66.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "road",
+        "left": "city",
+        "right": "city",
+        "image": "assets/img/pokessonne/67.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "city",
+        "right": "city",
+        "image": "assets/img/pokessonne/68.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "city",
+        "right": "city",
+        "image": "assets/img/pokessonne/69.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "city",
+        "right": "city",
+        "image": "assets/img/pokessonne/70.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "grass",
+        "left": "city",
+        "right": "city",
+        "image": "assets/img/pokessonne/71.gif",
+        "initial": false
+    },
+    {
+        "up": "city",
+        "down": "city",
+        "left": "city",
+        "right": "city",
+        "image": "assets/img/pokessonne/72.gif",
+        "initial": false
+    }
+]
