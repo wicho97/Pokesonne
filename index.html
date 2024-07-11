@@ -10,9 +10,14 @@
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
     <style>
-      html, body, pre, code, kbd, samp {
-          font-family: "Press Start 2P";
-      }
+        html,
+        body,
+        pre,
+        code,
+        kbd,
+        samp {
+            font-family: "Press Start 2P";
+        }
     </style>
 </head>
 
@@ -21,19 +26,54 @@
         <!-- Encabezado de la página -->
     </header>
 
-    <div class="main-content" id="main-content">
+    <div class="main-content" id="main-content" style="position: relative;">
         <!-- Contenido principal -->
-        <div class="grid-container" id="grid-container"></div>
+        <div style="position: relative;" id="main-grid-container">
+            <div class="grid-container" id="grid-container"></div>
+        </div>
+        <section class="nes-container">
+            <section class="message-list">
+                <section class="message -left">
+                    <i class="nes-bcrikko"></i>
+                    <!-- Balloon -->
+                    <div class="nes-balloon from-left">
+                        <p>Hello NES.css</p>
+                    </div>
+                </section>
+
+                <section class="message -right">
+                    <!-- Balloon -->
+                    <div class="nes-balloon from-right">
+                        <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
+                    </div>
+                    <i class="nes-bcrikko"></i>
+                </section>
+            </section>
+        </section>
+        <div class="content">
+            <div class="nes-container is-rounded"
+                style="position: absolute; top: 5%; right: 1%; background-color: #fff;">
+                <p>Piezas restantes: <span id="remaining-tiles"></span> </p>
+            </div>
+            <div class="button" style="position: absolute; bottom: 0; right: 0;">
+                <button id="zoom-in">+</button>
+                <button id="zoom-out">-</button>
+                <button id="reset">Reset</button>
+            </div>
+        </div>
     </div>
 
     <aside class="sidebar">
         <!-- Barra lateral con información adicional -->
-        <h1 id="usage">Pokésonne</h1>
-        <div id="current-tile">
-            <img class="nes-avatar" alt="Gravatar image example" style="image-rendering: pixelated;" id="tile-img">
+        <div class="content">
+            <h1 id="usage">Pokésonne</h1>
+            <div id="current-tile">
+                <img class="nes-avatar" alt="Gravatar image example" style="image-rendering: pixelated;" id="tile-img">
+            </div>
+            <button type="button" class="nes-btn is-success" id="rotate-tile">Rotate</button>
+            <button type="button" class="nes-btn is-warning" id="place-tile">Place</button>
         </div>
-        <button type="button" class="nes-btn is-success" id="rotate-tile">Rotate</button>
-        <button type="button" class="nes-btn is-warning" id="place-tile">Place</button>
+        <footer>Desarrollado por <a href="https://github.com/wicho97">@wicho97</a></footer>
     </aside>
 
     <footer>
@@ -42,15 +82,26 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-    <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
-    <!-- <script src="assets/js/panzoom.js"></script> -->
+    <script src="assets/js/panzoom.min.js"></script>
     <script src="assets/js/carcassonne.js"></script>
     <script>
-        // just grab a DOM element
-        var element = document.querySelector('#main-content')
+        //get main container
+        const elem = document.getElementById('main-grid-container');
+        //get zoom in button
+        const zoomInButton = document.getElementById('zoom-in');
+        //get zoom out button
+        const zoomOutButton = document.getElementById('zoom-out');
+        //get reset button
+        const resetButton = document.getElementById('reset');
 
-        // And pass it to panzoom
-        panzoom(element)
+        const panzoom = Panzoom(elem);
+        const parent = elem.parentElement
+
+        //enabling events
+        parent.addEventListener('wheel', panzoom.zoomWithWheel);
+        zoomInButton.addEventListener('click', panzoom.zoomIn)
+        zoomOutButton.addEventListener('click', panzoom.zoomOut)
+        resetButton.addEventListener('click', panzoom.reset)
     </script>
 </body>
 

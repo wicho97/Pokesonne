@@ -43,6 +43,13 @@ button {
     padding: 25px;
     text-align: center;
     border-left: 4px solid #848587;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .content {
+    flex-grow: 1;
 }
 
 .sidebar img {
@@ -52,14 +59,20 @@ button {
     height: 200px;
     width: 200px;
     margin: 0 auto;
+    border: 5px solid;
 }
 
 .main-content {
     min-height: 100vh;
     width: 75%;
+}
+
+#main-grid-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 .grid-container {
@@ -71,7 +84,7 @@ button {
     height: 100vh;
     position: relative;
     top: 45%;
-    left: 14%;
+    left: 15%;
 }
 
 .grid-item {
