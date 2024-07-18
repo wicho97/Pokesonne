@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokésonne</title>
-    <link rel="stylesheet" href="./node_modules/nes.css/css/nes.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
@@ -22,30 +21,8 @@
 </head>
 
 <body class="home">
-    <header>
-        <!-- Encabezado de la página -->
-    </header>
-
-    <div class="main-content" id="main-content" style="position: relative;">
-        <!-- Contenido principal -->
-        <div style="position: relative;" id="main-grid-container">
-            <div class="grid-container" id="grid-container"></div>
-        </div>
-        <div class="content">
-            <div class="nes-container is-rounded"
-                style="position: absolute; top: 5%; right: 1%; background-color: #fff;">
-                <p>Piezas restantes: <span id="remaining-tiles"></span> </p>
-            </div>
-            <div class="button" style="position: absolute; bottom: 0; right: 0;">
-                <button id="zoom-in">+</button>
-                <button id="zoom-out">-</button>
-                <button id="reset">Centrar zoom</button>
-            </div>
-        </div>
-    </div>
 
     <aside class="sidebar">
-        <!-- Barra lateral con información adicional -->
         <div class="content">
             <h1 id="usage">Pokésonne</h1>
             <div id="current-tile">
@@ -54,12 +31,24 @@
             <button type="button" class="nes-btn is-success" id="rotate-tile">Rotar</button>
             <button type="button" class="nes-btn is-warning" id="place-tile">Colocar</button>
         </div>
-        <footer>Desarrollado por <a href="https://github.com/wicho97">@wicho97</a></footer>
+        <footer>Desarrollado por <a href="https://github.com/wicho97" target="_blank">@wicho97</a></footer>
     </aside>
 
-    <footer>
-        <!-- Pie de página -->
-    </footer>
+    <div class="main-content" id="main-content" style="position: relative;">
+        <div style="position: relative;" id="main-grid-container">
+            <div class="grid-container" id="grid-container"></div>
+        </div>
+        <div class="content">
+            <div class="nes-container is-rounded">
+                <p>Piezas restantes: <span id="remaining-tiles"></span> </p>
+            </div>
+            <div class="button">
+                <button id="zoom-in">+</button>
+                <button id="zoom-out">-</button>
+                <button id="reset">Centrar zoom</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>

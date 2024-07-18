@@ -157,7 +157,7 @@ class CarcassonneMap {
         // (1, 1), (-1, 1)
         let keys = this.tiles.keys();
 
-        keys.forEach(key => {
+        for (let key of keys) {
             let xy = this._getXYFromString(key);
             directions.forEach(direction => {
                 // si direction[0] + x, direction[1] + y en Set no se agrega de lo contrario se agrega
@@ -167,7 +167,7 @@ class CarcassonneMap {
                 }
                 // createGrid(direction[0] + x, direction[1] + y);
             });
-        })
+        }
 
         return frontier;
     };
